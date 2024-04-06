@@ -1,0 +1,17 @@
+---
+name: update-flake-lock
+on:  # yamllint disable-line rule:truthy
+  workflow_dispatch:  # to allow for manual trigger via github web ui
+  schedule:
+    - cron: '0 0 1 * *'  # runs monthly at 00:00
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v26
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+      - uses: DeterminateSystems/update-flake-lock@v21
