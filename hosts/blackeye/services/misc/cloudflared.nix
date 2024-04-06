@@ -14,7 +14,7 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$(cat ${config.age.secrets.cloudflared-token.path})";
+      ExecStart = "${pkgs.bash}/bin/bash -c '${pkgs.cloudflared}/bin/cloudflared tunnel --no-autoupdate run --token=$(cat ${config.age.secrets.cloudflared-token.path})'";
       Restart = "on-failure";
       RestartSec = "5s";
       User = "cloudflared";
