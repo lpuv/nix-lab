@@ -38,6 +38,7 @@
       VISUAL = "nano";
     };
     systemPackages = with pkgs; [
+      cloudflared
       bashInteractive
       binutils
       coreutils
