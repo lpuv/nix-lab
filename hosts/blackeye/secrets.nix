@@ -15,7 +15,7 @@
     cachix-token.file = ../../secrets/cachix.age;
     cloudflared-token = {
       file = ../../secrets/cloudflared.age;
-      user = "cloudflared";
+      owner = "cloudflared";
       mode = "600";
     };
   };
