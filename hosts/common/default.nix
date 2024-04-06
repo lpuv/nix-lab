@@ -31,6 +31,31 @@
     };
   };
 
+  environment = {
+    variables = {
+      LANG = "en_US.UTF-8";
+      EDITOR = "nano";
+      VISUAL = "nano";
+    };
+    systemPackages = with pkgs; [
+      agenix
+      bashInteractive
+      binutils
+      coreutils
+      curl
+      file
+      git
+      gptfdisk
+      mkpasswd
+      nano
+      openssh
+      rclone
+      vim
+      wget
+      zsh
+    ];
+  };
+
   security.sudo.enable = true;
 
   services = {
