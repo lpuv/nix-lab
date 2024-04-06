@@ -36,6 +36,7 @@
   services = {
     resolved.enable = lib.mkDefault true; # mkDefault lets it be overridden
     openssh.enable = true;
+    qemuGuest.enable = true;
   };
 
   security.pam.sshAgentAuth.enable = true; # enable password-less sudo (using SSH keys)
