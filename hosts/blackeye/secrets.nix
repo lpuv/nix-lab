@@ -11,7 +11,8 @@
       lib.filter (e: e.type == "rsa" || e.type == "ed25519") config.services.openssh.hostKeys
     );
 
-  age.secrets.cachix-token = {
-    file = ../../secrets/cachix.age;
+  age.secrets = {
+    cachix-token.file = ../../secrets/cachix.age;
+    cloudflared-token.file = ../../secrets/cloudflared.age;
   };
 }
