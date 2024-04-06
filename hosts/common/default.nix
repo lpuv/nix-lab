@@ -30,6 +30,16 @@
     };
   };
 
+  security.sudo.enable = true;
+
+  services = {
+    resolved.enable = lib.mkDefault true; # mkDefault lets it be overridden
+    openssh.enable = lib.mkDefault true;
+  };
+
+  security.pam.sshAgentAuth.enable = true; # enable password-less sudo (using SSH keys)
+  security.pam.services.sudo.sshAgentAuth = true;
+
   users = {
     mutableUsers = false;
     users.root.openssh.authorizedKeys.keys = (import ./keys.nix).leo;
