@@ -9,6 +9,7 @@
     ./nix.nix
     ./trusted-nix-caches.nix
     ./well-known-hosts.nix
+    ./openssh.nix
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -34,7 +35,7 @@
 
   services = {
     resolved.enable = lib.mkDefault true; # mkDefault lets it be overridden
-    openssh.enable = lib.mkDefault true;
+    openssh.enable = true;
   };
 
   security.pam.sshAgentAuth.enable = true; # enable password-less sudo (using SSH keys)
