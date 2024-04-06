@@ -3,9 +3,9 @@
 
   inputs = {
     # repos
-    inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
-    inputs.cachix-deploy.url = "github:cachix/cachix-deploy-flake";
+    cachix-deploy.url = "github:cachix/cachix-deploy-flake";
 
     # agenix
     agenix = {
