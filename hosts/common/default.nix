@@ -38,7 +38,7 @@
       VISUAL = "nano";
     };
     systemPackages = with pkgs; [
-      agenix
+      agenix.agenix
       bashInteractive
       binutils
       coreutils
