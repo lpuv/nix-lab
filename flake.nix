@@ -35,8 +35,8 @@
           modules = 
           [
             agenix.nixosModules.default
-            ./hosts/common/
-            ./hosts/blackeye/
+            ./hosts/common
+            ./hosts/blackeye
           ];
 
         };
