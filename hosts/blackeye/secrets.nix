@@ -13,6 +13,10 @@
 
   age.secrets = {
     cachix-token.file = ../../secrets/cachix.age;
-    cloudflared-token.file = ../../secrets/cloudflared.age;
+    cloudflared-token = {
+      file = ../../secrets/cloudflared.age;
+      user = "cloudflared";
+      mode = "600";
+    };
   };
 }
