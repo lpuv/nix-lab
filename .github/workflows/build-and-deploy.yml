@@ -28,6 +28,7 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
       - name: Check
         run: nix flake check
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
       - name: Build
         run: nix build --print-build-logs .#cachix-deploy-spec
       - name: Deploy
