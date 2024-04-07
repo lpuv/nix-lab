@@ -18,5 +18,6 @@
       owner = "cloudflared";
       mode = "600";
     };
+    smb.file = ../../secrets/smb.age;
   };
 }

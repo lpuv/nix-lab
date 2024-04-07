@@ -12,6 +12,7 @@
     ./hardware.nix
     ./secrets.nix
     ./networking.nix
+    ./storage.nix
 
 
     # Services
