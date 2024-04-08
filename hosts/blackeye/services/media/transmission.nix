@@ -1,10 +1,15 @@
  { config, pkgs, ... }:
+ let
+
+ media_uid = 240;
+ 
+ in
  {
 
   users.users.media = {
     group = "media";
     isSystemUser = true;
-    uid = 240;
+    uid = media_uid;
   };
   users.groups.media = { };
 
@@ -25,7 +30,7 @@
         TRANSMISSION_WEB_HOME = "/config/flood-for-transmission/";
         LOCAL_NETWORK = "192.168.2.0/24";
         WHITELIST = "*.*.*.*";
-        PUID = config.users.users.media.uid;
+        PUID = media_uid;
       };
       environmentFiles = [
         config.age.secrets.transmission.path
