@@ -7,7 +7,7 @@
       externalPlugins = [
         { name = "caddy-dns/cloudflare"; repo = "github.com/caddy-dns/cloudflare"; version = "44030f9306f4815aceed3b042c7f3d2c2b110c97"; }
       ];
-      vendorHash = "";  # Add this, as explained in https://github.com/NixOS/nixpkgs/pull/259275#issuecomment-1763478985
+      vendorHash = "sha256-XucTo6zMHXQfyAQU/V/eveQTZh4hzLhkUFv2mD3Jxi0=";  # Add this, as explained in https://github.com/NixOS/nixpkgs/pull/259275#issuecomment-1763478985
     });
     globalConfig = ''
       servers {
