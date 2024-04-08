@@ -11,7 +11,7 @@
     isSystemUser = true;
     uid = media_uid;
   };
-  users.groups.media = { };
+  config.users.groups.media = { };
 
 
   config.virtualisation.oci-containers.containers = {
