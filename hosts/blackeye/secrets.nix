@@ -19,6 +19,10 @@
       mode = "600";
     };
     smb.file = ../../secrets/smb.age;
-    caddy.file = ../../secrets/caddy.age;
+    caddy = {
+      file = ../../secrets/caddy.age;
+      owner = "caddy";
+      mode = "600";
+    };
   };
 }
