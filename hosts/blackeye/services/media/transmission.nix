@@ -8,9 +8,6 @@
          "/mnt/media/torrents:/data/torrents"
          "/mnt/media/config/transmission:/config"
        ];
-       devices = [
-        "/dev/net/tun:/dev/net/tun"
-       ];
        environment = {
         CREATE_TUN_DEVICE = "false";
         TZ = "America/Los_Angeles";
