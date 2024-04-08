@@ -24,5 +24,6 @@
       owner = "caddy";
       mode = "600";
     };
+    transmission.file = ../../secrets/transmission.age;
   };
 }
