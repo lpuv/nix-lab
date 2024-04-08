@@ -30,7 +30,7 @@ jobs:
         run: nix flake check
       - uses: DeterminateSystems/magic-nix-cache-action@v2
       - name: Build
-        run: nix build --print-build-logs .#cachix-deploy-spec
+        run: nix build --option sandbox=false --print-build-logs .#cachix-deploy-spec
       - name: Deploy
         if: github.ref == 'refs/heads/main'
         env:
