@@ -6,7 +6,7 @@
  in
  {
 
-  users.users.media = {
+  config.users.users.media = {
     group = "media";
     isSystemUser = true;
     uid = media_uid;
