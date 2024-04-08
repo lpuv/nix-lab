@@ -11,6 +11,7 @@
       "x-systemd.mount-timeout=5s"
       "file_mode=0775"
       "dir_mode=0775"
+      "uid=240"
       "credentials=${config.age.secrets.smb.path}"
     ];
   };
