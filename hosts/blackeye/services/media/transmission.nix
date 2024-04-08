@@ -25,6 +25,7 @@
        ];
        extraOptions = [
         "--cap-add NET_ADMIN"
+        "--device=/dev/net/tun"
        ];
      };
    };
