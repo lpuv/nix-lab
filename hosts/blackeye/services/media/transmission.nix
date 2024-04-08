@@ -21,7 +21,7 @@
         config.age.secrets.transmission.path
        ];
        extraOptions = [
-        "--cap-add NET_ADMIN"
+        "--cap-add=NET_ADMIN"
         "--device=/dev/net/tun"
        ];
      };
