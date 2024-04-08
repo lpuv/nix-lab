@@ -18,6 +18,9 @@
     # Services
     ./services/misc/cachix.nix
     ./services/misc/cloudflared.nix
+
+    # Media
+    ./services/media/caddy.nix
   ];
 
   system.stateVersion = "23.11"; # DO NOT EDIT

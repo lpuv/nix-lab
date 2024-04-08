@@ -9,4 +9,5 @@ in
   "cachix.age".publicKeys = users ++ systems;
   "cloudflared.age".publicKeys = users ++ systems;
   "smb.age".publicKeys = users ++ systems;
+  "caddy.age".publicKeys = users ++ systems;
 }
