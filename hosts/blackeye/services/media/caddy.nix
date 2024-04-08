@@ -3,7 +3,7 @@
   services.caddy = {
     enable = true;
     # Custom package to allow for plugins, once https://github.com/NixOS/nixpkgs/pull/259275 is merged, delete this!
-    package = (pkgs.callPackage ../../../../pkgs/caddy.nix {
+    package = (pkgs.callPackage ../../../../packages/caddy.nix {
       externalPlugins = [
         { name = "caddy-dns/cloudflare"; repo = "github.com/caddy-dns/cloudflare"; version = "44030f9306f4815aceed3b042c7f3d2c2b110c97"; }
       ];
