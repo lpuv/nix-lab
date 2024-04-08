@@ -30,7 +30,7 @@
         TRANSMISSION_WEB_HOME = "/config/flood-for-transmission/";
         LOCAL_NETWORK = "192.168.2.0/24";
         WHITELIST = "*.*.*.*";
-        PUID = media_uid;
+        PUID = "${media_uid}";
       };
       environmentFiles = [
         config.age.secrets.transmission.path
