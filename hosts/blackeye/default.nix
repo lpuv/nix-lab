@@ -25,6 +25,7 @@
     ./services/media/sonarr.nix
     ./services/media/jellyfin.nix
     ./services/media/prowlarr.nix
+    ./services/flaresolverr.nix
   ];
 
   system.stateVersion = "23.11"; # DO NOT EDIT
