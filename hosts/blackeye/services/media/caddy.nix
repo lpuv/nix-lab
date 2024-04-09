@@ -14,9 +14,9 @@
         metrics
       }
     '';
-    extraConfig = ''
-      import ${config.age.secrets.caddy.path}
-    '';
+    # extraConfig = ''
+    #   import ${config.age.secrets.caddy.path}
+    # '';
     # service-specific config for Caddy reverse-proxying located
     # in each service file (ie sabnzbd.nix, etc.)
   };
