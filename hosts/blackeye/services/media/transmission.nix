@@ -32,6 +32,7 @@
         WHITELIST = "*.*.*.*";
         PUID = "${toString media_uid}";
       };
+      user = "media:media";
       environmentFiles = [
         config.age.secrets.transmission.path
       ];
