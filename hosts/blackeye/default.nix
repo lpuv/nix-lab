@@ -23,6 +23,7 @@
     ./services/media/caddy.nix
     ./services/media/transmission.nix
     ./services/media/sonarr.nix
+    ./services/media/jellyfin.nix
   ];
 
   system.stateVersion = "23.11"; # DO NOT EDIT
