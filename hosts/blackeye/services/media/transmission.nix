@@ -44,8 +44,8 @@
 
   config.services.caddy.virtualHosts."dl.internal.craftcat.dev" = {
     extraConfig = ''
-      reverse_proxy http://127.0.0.1:9091
       import ${config.age.secrets.caddy.path}
+      reverse_proxy http://127.0.0.1:9091
     '';
   };
  }
