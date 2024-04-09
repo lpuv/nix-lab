@@ -14,7 +14,8 @@
   # if https://github.com/NixOS/nixpkgs/pull/302919 gets merged, will not need this anymore
   systemd.services.prowlarr = {
     serviceConfig = {
-      ExecStart = lib.mkForce "${lib.getExe pkgs.prowlarr} -nobrowser -data=/mnt/media-config/prowlarr";
+      # Sqlite3 hates network drives... out of band operation: copy /mnt/media-config/prowlarr to /var/lib/prowlarr
+      #ExecStart = lib.mkForce "${lib.getExe pkgs.prowlarr} -nobrowser -data=/mnt/media-config/prowlarr";
       Group = "media";
     };
   };
