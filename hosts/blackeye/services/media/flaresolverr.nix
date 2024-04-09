@@ -14,7 +14,7 @@
     oci-containers = {
       backend = "podman";
       containers = {
-        flare-solvarr = {
+        flaresolverr = {
           image = "ghcr.io/flaresolverr/flaresolverr:latest";
           autoStart = true;
           ports = ["127.0.0.1:8191:8191"];
