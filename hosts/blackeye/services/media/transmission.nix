@@ -20,7 +20,7 @@
       ports = ["9091:9091"];
       volumes = [
         "/mnt/media/torrents:/data/torrents"
-        "/mnt/media/config/transmission:/config"
+        "/mnt/media-config/transmission:/config"
       ];
       environment = {
         CREATE_TUN_DEVICE = "false";

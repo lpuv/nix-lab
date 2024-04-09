@@ -21,4 +21,10 @@
     device = "192.168.1.5:/local-zfs/media";
     options = [ "nfsvers=4.2" ];
   };
+
+  fileSystems."/mnt/media-config" = {
+    fsType = "nfs";
+    device = "192.168.1.5:/fast-zfs/media-config";
+    options = [ "nfsvers=4.2" ];
+  };
 }
