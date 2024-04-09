@@ -3,7 +3,6 @@
   services.sonarr = {
     enable = true;
     group = "media";
-    package = pkgs.unstable.sonarr;
   };
 
   services.caddy.virtualHosts."sonarr.media.internal.craftcat.dev" = {
