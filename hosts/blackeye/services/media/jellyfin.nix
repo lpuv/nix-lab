@@ -5,7 +5,6 @@
     group = "media";
     openFirewall = true;
     dataDir = "/mnt/media-config/jellyfin";
-    configDir = "/mnt/media-config/jellyfin";
   };
 
   # Ensure that jellyfin waits for the downloads and media directories to be
