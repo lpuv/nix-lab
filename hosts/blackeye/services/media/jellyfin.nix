@@ -4,7 +4,7 @@
     enable = true;
     group = "media";
     openFirewall = true;
-    dataDir = "/mnt/media/media";
+    dataDir = "/mnt/media-config/jellyfin";
     configDir = "/mnt/media-config/jellyfin";
   };
 
