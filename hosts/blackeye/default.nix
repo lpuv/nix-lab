@@ -22,6 +22,7 @@
     # Media
     ./services/media/caddy.nix
     ./services/media/transmission.nix
+    ./services/media/sonarr.nix
   ];
 
   system.stateVersion = "23.11"; # DO NOT EDIT
