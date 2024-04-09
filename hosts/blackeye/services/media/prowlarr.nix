@@ -15,6 +15,7 @@
   systemd.services.prowlarr = {
     serviceConfig = {
       ExecStart = lib.mkForce "${lib.getExe pkgs.prowlarr} -nobrowser -data=/mnt/media-config/prowlarr";
+      Group = "media";
     };
   };
 }
