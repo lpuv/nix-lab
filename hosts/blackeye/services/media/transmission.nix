@@ -19,7 +19,7 @@
       image = "haugene/transmission-openvpn:5.3";
       ports = ["9091:9091"];
       volumes = [
-        "/mnt/media/torrents:/data/torrents"
+        "/mnt/media/torrents:/mnt/media/torrents"
         "/mnt/media-config/transmission:/config"
       ];
       environment = {
