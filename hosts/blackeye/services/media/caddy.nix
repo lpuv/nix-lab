@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 {
   services.caddy = {
     enable = true;
@@ -14,6 +14,7 @@
         metrics
       }
     '';
+    logFormat = lib.mkForce "level INFO";
     # extraConfig = ''
     #   import ${config.age.secrets.caddy.path}
     # '';
