@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: nix build --option sandbox=false --print-build-logs .#cachix-deploy-spec
       - name: Deploy
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' and github.event_name != 'pull_request'
         env:
           CACHIX_ACTIVATE_TOKEN: "${{ secrets.CACHIX_ACTIVATE_TOKEN }}"
         run: |
