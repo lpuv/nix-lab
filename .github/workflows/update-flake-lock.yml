@@ -4,11 +4,14 @@ on:  # yamllint disable-line rule:truthy
   workflow_dispatch:  # to allow for manual trigger via github web ui
   schedule:
     - cron: '0 0 1 * *'  # runs monthly at 00:00
-permissions:
-  contents: write
+
 
 jobs:
   lockfile:
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
