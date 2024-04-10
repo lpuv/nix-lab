@@ -3,6 +3,8 @@ name: "Build and Deploy"
 on:  # yamllint disable-line rule:truthy
   workflow_dispatch:  # allows manual triggering
   push:
+    paths-ignore:
+      - ".github/**"
     branches:
       - main
   pull_request:
