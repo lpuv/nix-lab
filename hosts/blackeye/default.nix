@@ -15,7 +15,7 @@
     ./storage.nix
 
 
-    # Services
+    # Infrastructure
     ./services/misc/cachix.nix
     ./services/misc/cloudflared.nix
 
@@ -26,6 +26,8 @@
     ./services/media/jellyfin.nix
     ./services/media/prowlarr.nix
     ./services/media/flaresolverr.nix
+
+    ./services/git/forgejo.nix
   ];
 
   system.stateVersion = "23.11"; # DO NOT EDIT
