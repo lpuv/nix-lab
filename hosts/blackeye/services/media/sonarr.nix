@@ -3,7 +3,8 @@
   services.sonarr = {
     enable = true;
     group = "media";
-    dataDir = "/mnt/media-config/sonarr-hd/";
+    # Sonarr hates config over NFS (sqlite issue apparently)
+    #dataDir = "/mnt/media-config/sonarr-hd/";
   };
 
   services.caddy.virtualHosts."sonarr.media.internal.craftcat.dev" = {
