@@ -11,7 +11,6 @@
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
-    "repl-flake"
   ];
 
   # The default at 10 is rarely enough.
