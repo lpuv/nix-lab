@@ -14,9 +14,9 @@
     '';
   };
 
-  # Ensure that sonarr waits for the downloads and media directories to be
+  # Ensure that radarr waits for the downloads and media directories to be
   # available.
-  systemd.services.sonarr = {
+  systemd.services.radarr = {
     wantedBy = [ "multi-user.target" ];
     after = [
       "network.target"
