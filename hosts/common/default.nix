@@ -17,7 +17,7 @@
   time.timeZone = "America/Los_Angeles";
 
   nix = {
-    package = pkgs.nixUnstable;
+    package = pkgs.nixVersions.latest;
     settings = {
       auto-optimise-store = true;
       cores = lib.mkDefault 0;

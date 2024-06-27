@@ -23,6 +23,7 @@
     ./services/media/caddy.nix
     ./services/media/transmission.nix
     ./services/media/sonarr.nix
+    ./services/media/radarr.nix
     ./services/media/jellyfin.nix
     ./services/media/prowlarr.nix
     ./services/media/flaresolverr.nix
