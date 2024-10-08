@@ -29,6 +29,8 @@
     ./services/media/flaresolverr.nix
 
     ./services/git/forgejo.nix
+
+    ./services/languagetool/libregrammar.nix
   ];
 
   system.stateVersion = "23.11"; # DO NOT EDIT
