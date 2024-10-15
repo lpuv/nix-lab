@@ -12,12 +12,19 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # lix (https://lix.systems)
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
     agenix,
+    lix-module,
     nixpkgs-stable,
     cachix-deploy
   }:
@@ -35,6 +42,7 @@
           modules = 
           [
             agenix.nixosModules.default
+            lix-module.nixosModules.default
             ./hosts/common
             ./hosts/blackeye
           ];
