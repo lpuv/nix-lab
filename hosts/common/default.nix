@@ -10,6 +10,7 @@
     ./trusted-nix-caches.nix
     ./well-known-hosts.nix
     ./openssh.nix
+    ./certs.nix
   ];
 
   i18n.defaultLocale = "en_US.UTF-8";

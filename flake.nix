@@ -42,7 +42,7 @@
           modules = 
           [
             agenix.nixosModules.default
-            lix-module.nixosModules.default
+            #lix-module.nixosModules.default
             ./hosts/common
             ./hosts/blackeye
           ];
