@@ -18,7 +18,7 @@
     # Infrastructure
     ./services/misc/cachix.nix
     ./services/misc/cloudflared.nix
-    ./services/misc/tailscale.nix
+    ./services/misc/tailscaled.nix
 
     # Media
     ./services/media/caddy.nix
