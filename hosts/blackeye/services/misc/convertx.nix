@@ -3,7 +3,7 @@
 
 
   config.virtualisation.oci-containers.containers = {
-    libregrammar = {
+    convertx = {
       image = "ghcr.io/c4illin/convertx";
       ports = ["3033:3000"];
       volumes = [
