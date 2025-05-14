@@ -34,6 +34,8 @@
     ./services/languagetool/libregrammar.nix
 
     ./services/misc/convertx.nix
+
+    ./services/misc/actualfinance.nix
   ];
 
   system.stateVersion = "23.11"; # DO NOT EDIT
