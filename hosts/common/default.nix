@@ -54,6 +54,7 @@
       vim
       wget
       zsh
+      python3
     ];
   };
 
