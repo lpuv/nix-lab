@@ -28,6 +28,7 @@
     ./services/media/jellyfin.nix
     ./services/media/prowlarr.nix
     ./services/media/flaresolverr.nix
+    ./services/media/bazarr.nix
 
     ./services/git/forgejo.nix
 
