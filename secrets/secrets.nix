@@ -1,14 +1,22 @@
 let
-  leo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK/5d3jAjWq1fOIyPk3jHMafTLJH6xqHv2bAZalQ/GaL";
-  users = [ leo ];
-
-  blackeye = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA5hZ7aKNTfQHgbs1zesY+Xl9sWNKxHcxtYmt43KXofs leo@blackeye";
-  systems = [ blackeye ];
+  luna = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK/5d3jAjWq1fOIyPk3jHMafTLJH6xqHv2bAZalQ/GaL luna@craftcat.dev";
+  panel = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA55f+d/8U6RmUkyAFFTFJCFJZNc3wzFbt372AQvRhTW root@panel.internal.craftcat.dev";
 in
 {
-  "cachix.age".publicKeys = users ++ systems;
-  "cloudflared.age".publicKeys = users ++ systems;
-  "smb.age".publicKeys = users ++ systems;
-  "caddy.age".publicKeys = users ++ systems;
-  "transmission.age".publicKeys = users ++ systems;
+  "pyrodactyl-db.env.age".publicKeys = [
+    panel
+    luna
+  ];
+  "pyrodactyl-panel.env.age".publicKeys = [
+    panel
+    luna
+  ];
+  "wings-config.yml.age".publicKeys = [
+    panel
+    luna
+  ];
+  "cloudflare.age".publicKeys = [
+    panel
+    luna
+  ];
 }
