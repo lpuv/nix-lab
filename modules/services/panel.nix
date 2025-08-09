@@ -145,6 +145,13 @@
         "${config.security.acme.certs."panel.internal.craftcat.dev".directory}:/etc/pterodactyl/certs:ro"
       ];
     };
+    playit-agent = {
+      image = "ghcr.io/playit-cloud/playit-agent:0.15";
+      extraOptions = [
+        "--net=host"
+      ];
+      environmentFiles = [ config.age.secrets."playit-tunnel".path ];
+    };
   };
 
 }

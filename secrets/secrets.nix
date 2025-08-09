@@ -19,4 +19,8 @@ in
     panel
     luna
   ];
+  "playit-tunnel.env.age".publicKeys = [
+    panel
+    luna
+  ];
 }

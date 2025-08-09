@@ -45,6 +45,11 @@
       owner = "root";
       group = "root";
     };
+    "playit-tunnel" = {
+      file = ../secrets/playit-tunnel.env.age;
+      owner = "root";
+      group = "root";
+    };
   };
 }
 
