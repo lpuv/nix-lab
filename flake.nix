@@ -80,7 +80,6 @@
         # Define each LXC as a "node" in the hive
         # ====================================================================
         # The key for each node must match the actual hostname of the container.
-        # nodes = {
           # "media.media.internal.craftcat.dev" = {
           #   imports = [ ./hosts/media-lxc.nix ];
           #   # Colmena will SSH directly into this host to deploy.
@@ -101,12 +100,15 @@
           #   imports = [ ./hosts/trilium-lxc.nix ];
           #   deployment.targetHost = "trilium.internal.craftcat.dev";
           # };
-
         panel = {name, nodes, ...}: {
           imports = [ ./hosts/panel-lxc.nix ];
           deployment.targetHost = "panel.internal.craftcat.dev";
         };
-        # };
+
+        dns = {name, nodes, ...}: {
+          imports = [ ./hosts/dns-lxc.nix ];
+          deployment.targetHost = "dns.internal.craftcat.dev";
+        };
       };
 
       # It's also good practice to expose the raw NixOS configurations.
@@ -136,6 +138,11 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/panel-lxc.nix ];
+        };
+        "dns-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/dns-lxc.nix ];
         };
       };
     };

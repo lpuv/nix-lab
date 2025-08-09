@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, agenixModule, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # Import shared configurations and the specific service module.
