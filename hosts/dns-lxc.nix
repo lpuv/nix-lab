@@ -106,6 +106,9 @@
     filters = map (url: { enabled = true; url = url; }) [
       "https://adguardteam.github.io/HostlistsRegistry/assets/filter_9.txt"
       "https://adguardteam.github.io/HostlistsRegistry/assets/filter_11.txt"
+      "https://adguardteam.github.io/HostlistsRegistry/assets/filter_45.txt"
+      "https://adguardteam.github.io/HostlistsRegistry/assets/filter_51.txt"
+      "https://adguardteam.github.io/HostlistsRegistry/assets/filter_44.txt"
     ];
   };
 }
