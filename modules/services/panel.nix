@@ -61,10 +61,10 @@
         proxyWebsockets = true;
         # Set headers to pass correct information to the backend.
         extraConfig = ''
-            add_header Host $host;
-            add_header X-Real-IP $remote_addr;
-            add_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            add_header X-Forwarded-Proto $scheme;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
         '';
       };
     };
@@ -81,7 +81,7 @@
 
     # -- Database Container --
     pyro-database = {
-      image = "mariadb:10.5";
+      image = "mariadb:10.11";
       ports = ["3306:3306"];
       volumes = [ "/srv/pyrodactyl/database:/var/lib/mysql" ];
       # Load database credentials securely from the agenix-decrypted file.
