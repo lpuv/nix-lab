@@ -86,8 +86,8 @@
       enabled = true;
       server_name = "dns.internal.craftcat.dev";
       port_https = 443;
-      certificate_chain = "${config.security.acme.certs."dns.internal.craftcat.dev".directory}/fullchain.pem";
-      private_key = "${config.security.acme.certs."dns.internal.craftcat.dev".directory}/key.pem";
+      certificate_path = "${config.security.acme.certs."dns.internal.craftcat.dev".directory}/full.pem";
+      private_key_path = "${config.security.acme.certs."dns.internal.craftcat.dev".directory}/key.pem";
     };
     dns = {
       # Use the local Unbound instance as the upstream DNS provider.
