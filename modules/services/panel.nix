@@ -106,9 +106,6 @@
         "/srv/pyrodactyl/certs:/etc/letsencrypt"
         "/srv/pyrodactyl/logs:/app/storage/logs"
       ];
-      extraOptions = [
-        "--dns=192.168.2.3" #TODO: remove me after setting up full dns chain
-      ];
       # Load panel configuration from the agenix-decrypted file.
       environmentFiles = [ config.age.secrets."pyrodactyl-panel".path ];
     };
@@ -125,9 +122,6 @@
         WINGS_GID = "988";
         WINGS_USERNAME = "pterodactyl";
       };
-      extraOptions = [
-        "--dns=192.168.2.3" #TODO: remove me after setting up full dns chain
-      ];
       volumes = [
         "/run/podman/podman.sock:/var/run/docker.sock"
         # This volume is important for Wings to inspect other containers.
