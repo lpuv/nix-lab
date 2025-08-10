@@ -43,6 +43,11 @@
   # Nginx will handle all incoming web traffic, terminate SSL, and
   # proxy requests to the correct backend container.
   services.nginx = {
+    appendHttpConfig = ''
+      proxy_headers_hash_max_size 1024;
+      proxy_headers_hash_bucket_size 128;
+    '';
+    logError = "stderr debug";
     enable = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
@@ -59,13 +64,6 @@
         proxyPass = "http://127.0.0.1:8081";
         # Required for the panel's real-time console to function.
         proxyWebsockets = true;
-        # Set headers to pass correct information to the backend.
-        extraConfig = ''
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-        '';
       };
     };
   };
