@@ -34,4 +34,9 @@
       reverse_proxy http://127.0.0.1:9091
     '';
   };
+
+  config.systemd.services."podman-transmission".serviceConfig = {
+    # Wait 5 minutes before trying to restart the service after a failure.
+    RestartSec = "5min";
+  };
  }
