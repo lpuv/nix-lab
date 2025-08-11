@@ -80,11 +80,10 @@
         # Define each LXC as a "node" in the hive
         # ====================================================================
         # The key for each node must match the actual hostname of the container.
-          # "media.media.internal.craftcat.dev" = {
-          #   imports = [ ./hosts/media-lxc.nix ];
-          #   # Colmena will SSH directly into this host to deploy.
-          #   deployment.targetHost = "media.media.internal.craftcat.dev";
-          # };
+        media = {name, nodes, ...}: {
+          imports = [ ./hosts/media-lxc.nix ];
+          deployment.targetHost = "media.internal.craftcat.dev";
+        };
 
           # "languagetool.internal.craftcat.dev" = {
           #   imports = [ ./hosts/languagetool-lxc.nix ];
@@ -109,16 +108,21 @@
           imports = [ ./hosts/dns-lxc.nix ];
           deployment.targetHost = "dns.internal.craftcat.dev";
         };
+
+        cfproxy = {name, nodes, ...}: {
+          imports = [ ./hosts/cfproxy-lxc.nix ];
+          deployment.targetHost = "cfproxy.internal.craftcat.dev";
+        };
       };
 
       # It's also good practice to expose the raw NixOS configurations.
       # This allows you to build them manually with `nixos-rebuild` if you ever need to.
       nixosConfigurations = {
-        # "media-lxc" = nixpkgs.lib.nixosSystem {
-        #   inherit system;
-        #   specialArgs = { inherit inputs; };
-        #   modules = [ ./hosts/media-lxc.nix ];
-        # };
+        "media-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/media-lxc.nix ];
+        };
         # "languagetool-lxc" = nixpkgs.lib.nixosSystem {
         #   inherit system;
         #   specialArgs = { inherit inputs; };
@@ -143,6 +147,11 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/dns-lxc.nix ];
+        };
+        "cfproxy-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/cfproxy.nix ];
         };
       };
     };
