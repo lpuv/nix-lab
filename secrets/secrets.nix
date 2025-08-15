@@ -4,6 +4,7 @@ let
   dns = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILSsbpk5MPFi/r1J9bL6wusL+MgCMjmM5GMel5zmlfwm root@dns.internal.craftcat.dev";
   media = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/uOFftIZeJwH8Uzdhp8/dNuB99LgLbkCBUTrvgr1zk root@media.internal.craftcat.dev";
   cfproxy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB4yG5KMgJEoQIEvmjO/mPRbdEa3XgqXVPmo4XbyyQhs root@cfproxy.internal.craftcat.dev";
+  receipts = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJpepW61sNjpDLlcB+FF8YDQUjEu2CUT+mOCs1USON2k root@receipts.internal.craftat.dev";
 in
 {
   "pyrodactyl-db.env.age".publicKeys = [
@@ -37,6 +38,18 @@ in
   ];
   "cloudflared.age".publicKeys = [
     cfproxy
+    luna
+  ];
+  "receipt-wrangler-db.env.age".publicKeys = [
+    receipts
+    luna
+  ];
+  "receipt-wrangler-redis.env.age".publicKeys = [
+    receipts
+    luna
+  ];
+  "receipt-wrangler.env.age".publicKeys = [
+    receipts
     luna
   ];
 }

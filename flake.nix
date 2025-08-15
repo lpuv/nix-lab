@@ -113,6 +113,11 @@
           imports = [ ./hosts/cfproxy-lxc.nix ];
           deployment.targetHost = "cfproxy.internal.craftcat.dev";
         };
+
+        receipts = {name, nodes, ...}: {
+          impotrs = [ ./hosts/receipts-lxc.nix ];
+          deployment.targetHost = "receipts.internal.craftcat.dev";
+        };
       };
 
       # It's also good practice to expose the raw NixOS configurations.
@@ -152,6 +157,11 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/cfproxy.nix ];
+        };
+        "receipts-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/receipts-lxc.nix ];
         };
       };
     };
