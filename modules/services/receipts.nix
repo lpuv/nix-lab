@@ -31,7 +31,7 @@
     };
 
     # -- Receipt Wrangler Container --
-    pyro-panel = {
+    receipt-wrangler = {
       image = "noah231515/receipt-wrangler:latest";
       entrypoint = "./entrypoint.sh";
       dependsOn = [

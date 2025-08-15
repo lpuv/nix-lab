@@ -115,7 +115,7 @@
         };
 
         receipts = {name, nodes, ...}: {
-          impotrs = [ ./hosts/receipts-lxc.nix ];
+          imports = [ ./hosts/receipts-lxc.nix ];
           deployment.targetHost = "receipts.internal.craftcat.dev";
         };
       };

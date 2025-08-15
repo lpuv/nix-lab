@@ -12,9 +12,9 @@
   networking.hostName = "receipts";
 
   systemd.tmpfiles.rules = [
-    "d /srv/receipts/database 0770 root root -"
+    "d /srv/receipts/database 0770 nscd nscd -"
     "d /srv/receipts/data 0770 root root -"
-    "d /srv/endings/sqlite 0770 root root -"
+    "d /srv/receipts/sqlite 0770 root root -"
   ];
   
   # This secret will be decrypted on this host and placed in the specified file.
