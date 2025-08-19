@@ -1,7 +1,6 @@
 {
   description = "A NixOS flake for managing my homelab";
 
-
   # ============================================================================
   # Flake Inputs
   # ============================================================================
@@ -34,12 +33,15 @@
   # ============================================================================
   # Outputs are the "products" of your flake. These can be packages,
   # NixOS configurations, or, in our case, a Colmena hive.
-# ============================================================================
-  # Flake Outputs
   # ============================================================================
-  # Outputs are the "products" of your flake. These can be packages,
-  # NixOS configurations, or, in our case, a Colmena hive.
-  outputs = { self, nixpkgs, agenix, colmena, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      agenix,
+      colmena,
+      ...
+    }@inputs:
     let
       # Define the system architecture you are deploying to.
       system = "x86_64-linux";
@@ -48,7 +50,7 @@
     {
       # The primary output for Colmena v0.5+
       # It must be named `colmenaHive`.
-      colmenaHive = colmena.lib.makeHive self.outputs.colmena; 
+      colmenaHive = colmena.lib.makeHive self.outputs.colmena;
       colmena = {
         meta = {
           # This allows Colmena to pass flake inputs to your configurations.
@@ -64,8 +66,8 @@
 
           # Special arguments that will be passed to all configurations.
           # This is useful for passing down `pkgs` or other global values.
-          # specialArgs = 
-          # { 
+          # specialArgs =
+          # {
           #   inherit inputs system pkgs;
           # };
 
@@ -80,44 +82,57 @@
         # Define each LXC as a "node" in the hive
         # ====================================================================
         # The key for each node must match the actual hostname of the container.
-        media = {name, nodes, ...}: {
-          imports = [ ./hosts/media-lxc.nix ];
-          deployment.targetHost = "media.internal.craftcat.dev";
-        };
+        media =
+          { name, nodes, ... }:
+          {
+            imports = [ ./hosts/media-lxc.nix ];
+            deployment.targetHost = "media.internal.craftcat.dev";
+          };
 
-          # "languagetool.internal.craftcat.dev" = {
-          #   imports = [ ./hosts/languagetool-lxc.nix ];
-          #   deployment.targetHost = "languagetool.internal.craftcat.dev";
-          # };
+        # "languagetool.internal.craftcat.dev" = {
+        #   imports = [ ./hosts/languagetool-lxc.nix ];
+        #   deployment.targetHost = "languagetool.internal.craftcat.dev";
+        # };
 
-          # "open-webui.internal.craftcat.dev" = {
-          #   imports = [ ./hosts/open-webui-lxc.nix ];
-          #   deployment.targetHost = "open-webui.internal.craftcat.dev";
-          # };
+        # "open-webui.internal.craftcat.dev" = {
+        #   imports = [ ./hosts/open-webui-lxc.nix ];
+        #   deployment.targetHost = "open-webui.internal.craftcat.dev";
+        # };
 
-          # "trilium.internal.craftcat.dev" = {
-          #   imports = [ ./hosts/trilium-lxc.nix ];
-          #   deployment.targetHost = "trilium.internal.craftcat.dev";
-          # };
-        panel = {name, nodes, ...}: {
-          imports = [ ./hosts/panel-lxc.nix ];
-          deployment.targetHost = "panel.internal.craftcat.dev";
-        };
+        panel =
+          { name, nodes, ... }:
+          {
+            imports = [ ./hosts/panel-lxc.nix ];
+            deployment.targetHost = "panel.internal.craftcat.dev";
+          };
 
-        dns = {name, nodes, ...}: {
-          imports = [ ./hosts/dns-lxc.nix ];
-          deployment.targetHost = "dns.internal.craftcat.dev";
-        };
+        dns =
+          { name, nodes, ... }:
+          {
+            imports = [ ./hosts/dns-lxc.nix ];
+            deployment.targetHost = "dns.internal.craftcat.dev";
+          };
 
-        cfproxy = {name, nodes, ...}: {
-          imports = [ ./hosts/cfproxy-lxc.nix ];
-          deployment.targetHost = "cfproxy.internal.craftcat.dev";
-        };
+        cfproxy =
+          { name, nodes, ... }:
+          {
+            imports = [ ./hosts/cfproxy-lxc.nix ];
+            deployment.targetHost = "cfproxy.internal.craftcat.dev";
+          };
 
-        receipts = {name, nodes, ...}: {
-          imports = [ ./hosts/receipts-lxc.nix ];
-          deployment.targetHost = "receipts.internal.craftcat.dev";
-        };
+        receipts =
+          { name, nodes, ... }:
+          {
+            imports = [ ./hosts/receipts-lxc.nix ];
+            deployment.targetHost = "receipts.internal.craftcat.dev";
+          };
+
+        trilium =
+          { name, nodes, ... }:
+          {
+            imports = [ ./hosts/trilium-lxc.nix ];
+            deployment.targetHost = "trilium.internal.craftcat.dev";
+          };
       };
 
       # It's also good practice to expose the raw NixOS configurations.
@@ -137,11 +152,6 @@
         #   inherit system;
         #   specialArgs = { inherit inputs; };
         #   modules = [ ./hosts/open-webui-lxc.nix ];
-        # };
-        # "trilium-lxc" = nixpkgs.lib.nixosSystem {
-        #   inherit system;
-        #   specialArgs = { inherit inputs; };
-        #   modules = [ ./hosts/trilium-lxc.nix ];
         # };
         "panel-lxc" = nixpkgs.lib.nixosSystem {
           inherit system;
@@ -163,7 +173,11 @@
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/receipts-lxc.nix ];
         };
+        "trilium-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/trilium-lxc.nix ];
+        };
       };
     };
 }
-
