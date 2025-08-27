@@ -10,9 +10,9 @@
       ];
       environment = {
         CREATE_TUN_DEVICE = "false";
-        TZ = "America/Los_Angeles";
+        TZ = "America/Toronto";
         OPENVPN_PROVIDER = "mullvad";
-        OPENVPN_CONFIG = "us_lax";
+        OPENVPN_CONFIG = "ca_mtr";
         TRANSMISSION_WEB_HOME = "/config/flood-for-transmission/";
         LOCAL_NETWORK = "192.168.2.0/24";
         WHITELIST = "*.*.*.*";
