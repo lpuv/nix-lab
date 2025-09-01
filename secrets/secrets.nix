@@ -5,6 +5,7 @@ let
   media = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAII/uOFftIZeJwH8Uzdhp8/dNuB99LgLbkCBUTrvgr1zk root@media.internal.craftcat.dev";
   cfproxy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB4yG5KMgJEoQIEvmjO/mPRbdEa3XgqXVPmo4XbyyQhs root@cfproxy.internal.craftcat.dev";
   receipts = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJpepW61sNjpDLlcB+FF8YDQUjEu2CUT+mOCs1USON2k root@receipts.internal.craftat.dev";
+  finance = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICoBodQeGhu1oqTr8uar7OF7pXMRRcE5LxeuKXdCe0Cj root@finance.internal.craftcat.dev";
 in
 {
   "pyrodactyl-db.env.age".publicKeys = [
@@ -50,6 +51,10 @@ in
   ];
   "receipt-wrangler.env.age".publicKeys = [
     receipts
+    luna
+  ];
+  "firefly-app-key.age".publicKeys = [
+    finance
     luna
   ];
 }

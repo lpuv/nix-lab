@@ -133,6 +133,12 @@
             imports = [ ./hosts/trilium-lxc.nix ];
             deployment.targetHost = "trilium.internal.craftcat.dev";
           };
+        finance =
+          { name, nodes, ... }:
+          {
+            imports = [ ./hosts/finance-lxc.nix ];
+            deployment.targetHost = "finance.internal.craftcat.dev";
+          };
       };
 
       # It's also good practice to expose the raw NixOS configurations.
