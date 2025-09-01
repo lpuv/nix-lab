@@ -8,10 +8,11 @@
     authentication = ''
       local all all trust
     '';
-    initialDatabases = [
+    ensureDatabases = [ "firefly" ];
+    ensureUsers = [
       {
-        owner = "firefly";
         name = "firefly";
+        ensureDBOwnership = true;
       }
     ];
   };
