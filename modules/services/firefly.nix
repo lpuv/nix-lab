@@ -26,6 +26,7 @@
 
   services.firefly-iii = {
     enable = true;
+    enableNginx = true;
     user = "firefly";
     group = "firefly";
     dataDir = "/var/lib/firefly-iii";
@@ -45,6 +46,8 @@
       # We can point it to an empty file or a dummy secret.
       DB_PASSWORD = "";
     };
+
+    virtualHost = "finance.craftcat.dev";
 
   };
   services.firefly-iii-data-importer = {

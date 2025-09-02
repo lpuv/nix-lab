@@ -23,6 +23,9 @@
     # The user needs a home directory to write data to.
     home = config.services.firefly-iii.dataDir;
   };
+  # Grant the Nginx user access to the Firefly III PHP-FPM socket
+  # by adding it to the 'firefly' group.
+  users.users.nginx.extraGroups = [ "firefly" ];
 
   # secrets
   age.secrets = {
