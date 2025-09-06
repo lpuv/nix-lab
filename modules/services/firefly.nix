@@ -45,6 +45,8 @@
       # with trust authentication, but the setting is still required.
       # We can point it to an empty file or a dummy secret.
       DB_PASSWORD = "";
+
+      TRUSTED_PROXIES = "*";
     };
 
     virtualHost = "finance.craftcat.dev";
