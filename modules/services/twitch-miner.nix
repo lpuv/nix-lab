@@ -12,7 +12,7 @@
   virtualisation.docker.enable = true;
 
   # Define the Twitch Channel Points Miner container
-  virtualisation.oci-containers.containers = {
+  config.virtualisation.oci-containers.containers = {
     twitch-miner = {
       image = "rdavidoff/twitch-channel-points-miner-v2:latest";
       ports = [ "5000:5000" ];  # Analytics web interface
@@ -54,22 +54,32 @@
       if [ ! -f /srv/twitch-miner/run.py ]; then
         cat > /srv/twitch-miner/run.py << 'EOF'
 # -*- coding: utf-8 -*-
+# Twitch Channel Points Miner v2 Configuration
+# 
+# This is a basic configuration file for the Twitch Channel Points Miner.
+# Edit this file to customize your settings.
+#
+# For full documentation, see:
+# https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2
 
 import logging
 from TwitchChannelPointsMiner import TwitchChannelPointsMiner
 from TwitchChannelPointsMiner.logger import LoggerSettings
 from TwitchChannelPointsMiner.classes.Settings import Priority, FollowersOrder
+from TwitchChannelPointsMiner.classes.entities.Bet import Strategy, BetSettings, Condition, OutcomeKeys, FilterCondition
+from TwitchChannelPointsMiner.classes.entities.Streamer import Streamer, StreamerSettings
 
 # Initialize the miner
 twitch_miner = TwitchChannelPointsMiner(
-    username="your-twitch-username",  # Change this to your Twitch username
+    username="your-twitch-username",  # CHANGE THIS to your Twitch username
+    # password="your-password",  # Optional: If not provided, you'll be prompted for login
     claim_drops_startup=False,
     priority=[
-        Priority.STREAK,
-        Priority.DROPS,
-        Priority.ORDER
+        Priority.STREAK,    # Prioritize watch streaks
+        Priority.DROPS,     # Claim drops when available  
+        Priority.ORDER      # Follow the order of streamers in the list
     ],
-    enable_analytics=True,  # Enable analytics for web interface
+    enable_analytics=True,  # Enable analytics for web interface on port 5000
     logger_settings=LoggerSettings(
         save=True,
         console_level=logging.INFO,
@@ -80,18 +90,41 @@ twitch_miner = TwitchChannelPointsMiner(
     )
 )
 
-# Start analytics web server
+# Start analytics web server (accessible on port 5000)
 twitch_miner.analytics(host="0.0.0.0", port=5000, refresh=5, days_ago=7)
 
-# Start mining - replace with your streamers or use followers
+# Start mining points
+# Option 1: Use your followers list automatically
 twitch_miner.mine(
     followers=True,
     followers_order=FollowersOrder.ASC
 )
+
+# Option 2: Specify streamers manually (uncomment and modify)
+# twitch_miner.mine([
+#     "streamer1",
+#     "streamer2", 
+#     "streamer3",
+#     Streamer("streamer4", settings=StreamerSettings(
+#         make_predictions=True,
+#         follow_raid=True,
+#         bet=BetSettings(
+#             strategy=Strategy.SMART,
+#             percentage=5,
+#             max_points=50000
+#         )
+#     ))
+# ])
 EOF
         chmod 644 /srv/twitch-miner/run.py
         echo "Created default run.py configuration. Please edit /srv/twitch-miner/run.py with your settings."
       fi
     '';
+  };
+
+  # Configure service restart behavior
+  config.systemd.services."podman-twitch-miner".serviceConfig = {
+    # Wait 2 minutes before trying to restart the service after a failure.
+    RestartSec = "2min";
   };
 }
