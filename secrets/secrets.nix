@@ -32,6 +32,7 @@ in
   ];
   "caddy.age".publicKeys = [
     media
+    twitch-miner
     luna
   ];
   "transmission.env.age".publicKeys = [
