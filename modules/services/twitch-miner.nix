@@ -12,7 +12,7 @@
   virtualisation.docker.enable = true;
 
   # Define the Twitch Channel Points Miner container
-  config.virtualisation.oci-containers.containers = {
+  virtualisation.oci-containers.containers = {
     twitch-miner = {
       image = "rdavidoff/twitch-channel-points-miner-v2:latest";
       ports = [ "5000:5000" ];  # Analytics web interface
@@ -154,7 +154,7 @@ EOF
   };
 
   # Configure service restart behavior
-  config.systemd.services."podman-twitch-miner".serviceConfig = {
+  systemd.services."podman-twitch-miner".serviceConfig = {
     # Wait 2 minutes before trying to restart the service after a failure.
     RestartSec = "2min";
   };
