@@ -158,4 +158,12 @@ EOF
     # Wait 2 minutes before trying to restart the service after a failure.
     RestartSec = "2min";
   };
+
+  # Configure Caddy reverse proxy for the analytics web interface
+  services.caddy.virtualHosts."twitch-miner.internal.craftcat.dev" = {
+    extraConfig = ''
+      import ${config.age.secrets.caddy.path}
+      reverse_proxy http://localhost:5000
+    '';
+  };
 }
