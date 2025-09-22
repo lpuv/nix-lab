@@ -139,6 +139,13 @@
             imports = [ ./hosts/finance-lxc.nix ];
             deployment.targetHost = "finance.internal.craftcat.dev";
           };
+        
+        twitch-miner =
+          { name, nodes, ... }:
+          {
+            imports = [ ./hosts/twitch-miner-lxc.nix ];
+            deployment.targetHost = "twitch-miner.internal.craftcat.dev";
+          };
       };
 
       # It's also good practice to expose the raw NixOS configurations.
@@ -183,6 +190,11 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/trilium-lxc.nix ];
+        };
+        "twitch-miner-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/twitch-miner-lxc.nix ];
         };
       };
     };
