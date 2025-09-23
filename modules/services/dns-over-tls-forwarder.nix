@@ -28,4 +28,10 @@
       };
     };
   };
+
+  # Configure service restart behavior for reliability
+  systemd.services."podman-dns-over-tls-forwarder".serviceConfig = {
+    # Wait 30 seconds before trying to restart the service after a failure
+    RestartSec = "30s";
+  };
 }

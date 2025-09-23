@@ -35,6 +35,8 @@
 
   # --- Local Recursive DNS (Unbound) ---
   # Enable the Unbound service. AdGuard Home will use this as its upstream.
+  # Port 5335: Unbound (recursive DNS)
+  # Port 5353: DNS over TLS forwarder (proxies to Cloudflare via HTTPS/TLS)
   services.unbound = {
     enable = true;
     settings = {
