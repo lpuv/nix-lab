@@ -4,9 +4,13 @@
   imports = [
     ../modules/common.nix
     ../modules/services/dns.nix
+    ../modules/services/dns-over-tls-forwarder.nix
   ];
 
   services.resolved.enable = false;
+
+  # Enable Docker for running OCI containers (DNS over TLS forwarder)
+  virtualisation.docker.enable = true;
 
   age.secrets."cloudflare" = {
     file = ../secrets/cloudflare.age;
@@ -21,9 +25,11 @@
       80
       443
       53
+      5353  # DNS over TLS forwarder
     ];
     firewall.allowedUDPPorts = [
       53
+      5353  # DNS over TLS forwarder
     ];
   };
 
