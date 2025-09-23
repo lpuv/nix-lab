@@ -9,8 +9,8 @@
       image = "cloudflare/cloudflared:latest";
       autoStart = true;
       ports = [
-        "127.0.0.1:5353:5353/udp"
-        "127.0.0.1:5353:5353/tcp"
+        "5353:5353/udp"
+        "5353:5353/tcp"
       ];
       cmd = [
         "proxy-dns"
