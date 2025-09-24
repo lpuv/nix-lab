@@ -196,6 +196,11 @@
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/twitch-miner-lxc.nix ];
         };
+        "finance-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/finance-lxc.nix ];
+        };
       };
     };
 }
