@@ -27,7 +27,4 @@
   nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 7d";
 
-  # Needed to compile caddy, but should not have much effect as flake is built i
-n Github Actions
-  nix.settings.sandbox = false;
 }
