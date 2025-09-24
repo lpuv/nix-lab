@@ -73,6 +73,8 @@
 
           imports = [
             agenix.nixosModules.default
+            ./hosts/common/nix.nix
+            ./hosts/common/openssh.nix
           ];
 
           networking.domain = "internal.craftcat.dev";
