@@ -55,4 +55,96 @@
   services.firefly-iii-data-importer = {
     enable = true;
   };
+
+  # Firefly III cron jobs using systemd timers
+  # These correspond to the official cron documentation at:
+  # https://docs.firefly-iii.org/how-to/firefly-iii/advanced/cron/
+
+  systemd.services.firefly-cron-recurring = {
+    description = "Firefly III recurring transactions";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "firefly";
+      Group = "firefly";
+      ExecStart = "${pkgs.php}/bin/php ${config.services.firefly-iii.dataDir}/artisan firefly:cron-recurring";
+      WorkingDirectory = config.services.firefly-iii.dataDir;
+    };
+    environment = config.services.firefly-iii.settings;
+  };
+
+  systemd.timers.firefly-cron-recurring = {
+    description = "Run Firefly III recurring transactions daily";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+      RandomizedDelaySec = "15m";
+    };
+  };
+
+  systemd.services.firefly-cron-auto-budget = {
+    description = "Firefly III auto-budget";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "firefly";
+      Group = "firefly";
+      ExecStart = "${pkgs.php}/bin/php ${config.services.firefly-iii.dataDir}/artisan firefly:cron-auto-budget";
+      WorkingDirectory = config.services.firefly-iii.dataDir;
+    };
+    environment = config.services.firefly-iii.settings;
+  };
+
+  systemd.timers.firefly-cron-auto-budget = {
+    description = "Run Firefly III auto-budget daily";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+      RandomizedDelaySec = "15m";
+    };
+  };
+
+  systemd.services.firefly-cron-exchange-rates = {
+    description = "Firefly III exchange rates update";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "firefly";
+      Group = "firefly";
+      ExecStart = "${pkgs.php}/bin/php ${config.services.firefly-iii.dataDir}/artisan firefly:cron-exchange-rates";
+      WorkingDirectory = config.services.firefly-iii.dataDir;
+    };
+    environment = config.services.firefly-iii.settings;
+  };
+
+  systemd.timers.firefly-cron-exchange-rates = {
+    description = "Run Firefly III exchange rates update daily";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+      RandomizedDelaySec = "15m";
+    };
+  };
+
+  systemd.services.firefly-cron-cleanup = {
+    description = "Firefly III cleanup old entries";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "firefly";
+      Group = "firefly";
+      ExecStart = "${pkgs.php}/bin/php ${config.services.firefly-iii.dataDir}/artisan firefly:cron-cleanup";
+      WorkingDirectory = config.services.firefly-iii.dataDir;
+    };
+    environment = config.services.firefly-iii.settings;
+  };
+
+  systemd.timers.firefly-cron-cleanup = {
+    description = "Run Firefly III cleanup weekly";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "weekly";
+      Persistent = true;
+      RandomizedDelaySec = "30m";
+    };
+  };
 }
