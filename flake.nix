@@ -73,6 +73,7 @@
 
           imports = [
             agenix.nixosModules.default
+            ./hosts/common/default.nix
             ./hosts/common/nix.nix
             ./hosts/common/openssh.nix
           ];
