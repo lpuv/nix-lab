@@ -69,7 +69,6 @@
       ExecStart = "${pkgs.php}/bin/php ${config.services.firefly-iii.dataDir}/artisan firefly:cron-recurring";
       WorkingDirectory = config.services.firefly-iii.dataDir;
     };
-    environment = config.services.firefly-iii.settings;
   };
 
   systemd.timers.firefly-cron-recurring = {
@@ -91,7 +90,6 @@
       ExecStart = "${pkgs.php}/bin/php ${config.services.firefly-iii.dataDir}/artisan firefly:cron-auto-budget";
       WorkingDirectory = config.services.firefly-iii.dataDir;
     };
-    environment = config.services.firefly-iii.settings;
   };
 
   systemd.timers.firefly-cron-auto-budget = {
@@ -113,7 +111,6 @@
       ExecStart = "${pkgs.php}/bin/php ${config.services.firefly-iii.dataDir}/artisan firefly:cron-exchange-rates";
       WorkingDirectory = config.services.firefly-iii.dataDir;
     };
-    environment = config.services.firefly-iii.settings;
   };
 
   systemd.timers.firefly-cron-exchange-rates = {
@@ -135,7 +132,6 @@
       ExecStart = "${pkgs.php}/bin/php ${config.services.firefly-iii.dataDir}/artisan firefly:cron-cleanup";
       WorkingDirectory = config.services.firefly-iii.dataDir;
     };
-    environment = config.services.firefly-iii.settings;
   };
 
   systemd.timers.firefly-cron-cleanup = {
