@@ -159,6 +159,25 @@ EOF
     RestartSec = "2min";
   };
 
+  # Service to restart the twitch-miner container
+  systemd.services.restart-twitch-miner = {
+    description = "Restart Twitch Miner container";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.systemd}/bin/systemctl restart podman-twitch-miner.service";
+    };
+  };
+
+  # Timer to restart the twitch-miner container daily at 2am
+  systemd.timers.restart-twitch-miner = {
+    description = "Daily restart of Twitch Miner at 2am";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 02:00:00";
+      Persistent = true;
+    };
+  };
+
   # Configure Caddy reverse proxy for the analytics web interface
   services.caddy.virtualHosts."twitch-miner.internal.craftcat.dev" = {
     extraConfig = ''
