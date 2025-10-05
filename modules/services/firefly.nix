@@ -47,6 +47,7 @@
       DB_PASSWORD = "";
 
       TRUSTED_PROXIES = "*";
+      ALLOW_WEBHOOKS = "true";
     };
 
     virtualHost = "finance.craftcat.dev";
