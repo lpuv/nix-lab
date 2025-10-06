@@ -55,6 +55,7 @@
     wget      # A tool for downloading files from the web
     curl      # A tool for transferring data with URLs
     unzip     # A tool for extracting archives
+    dig       # A tool for testing DNS
   ];
 
   # ============================================================================
