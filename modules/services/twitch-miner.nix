@@ -30,6 +30,7 @@
       extraOptions = [
         "--tty"
         "--interactive"
+        "--dns=192.168.2.3"
       ];
     };
   };
