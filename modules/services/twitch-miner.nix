@@ -154,18 +154,12 @@ EOF
     '';
   };
 
-  # Configure service restart behavior
-  systemd.services."podman-twitch-miner".serviceConfig = {
-    # Wait 2 minutes before trying to restart the service after a failure.
-    RestartSec = "2min";
-  };
-
-  # Timer to restart the twitch-miner container daily at 2am
+  # Timer to restart the twitch-miner container every 2 hours
   systemd.timers."podman-twitch-miner" = {
-    description = "Daily restart of Twitch Miner at 2am";
+    description = "Daily restart of Twitch Miner every 2 hours";
     wantedBy = [ "timers.target" ];
     timerConfig = {
-      OnCalendar = "0/5:00:00";
+      OnCalendar = "0/2:00:00"; # for some reason, the container breaks a LOT
       Persistent = true;
     };
   };
