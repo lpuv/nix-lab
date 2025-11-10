@@ -49,14 +49,14 @@
   # ============================================================================
   # Install a set of useful command-line tools on every container.
   environment.systemPackages = with pkgs; [
-    helix     # A powerful text editor
-    git       # Version control system
-    btop      # An interactive process viewer
-    wget      # A tool for downloading files from the web
-    curl      # A tool for transferring data with URLs
-    unzip     # A tool for extracting archives
-    dig       # A tool for testing DNS
-    unrar     # A tool for extracting rar files
+    helix      # A powerful text editor
+    git        # Version control system
+    btop       # An interactive process viewer
+    wget       # A tool for downloading files from the web
+    curl       # A tool for transferring data with URLs
+    unzip      # A tool for extracting archives
+    dig        # A tool for testing DNS
+    unrar-free # A tool for extracting rar files
   ];
 
   # ============================================================================
