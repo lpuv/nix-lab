@@ -56,6 +56,7 @@
     curl      # A tool for transferring data with URLs
     unzip     # A tool for extracting archives
     dig       # A tool for testing DNS
+    unrar     # A tool for extracting rar files
   ];
 
   # ============================================================================
