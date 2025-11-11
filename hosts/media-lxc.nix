@@ -76,6 +76,7 @@
   };
 
   virtualisation.docker.enable = true;
+  systemd.timers.podman-auto-update.wantedBy = [ "multi-user.target" ];
 
   age.secrets = {
     "caddy" = {

@@ -11,6 +11,8 @@
   # This must match the node name in your flake.nix.
   networking.hostName = "panel";
 
+  systemd.timers.podman-auto-update.wantedBy = [ "multi-user.target" ];
+
   systemd.tmpfiles.rules = [
     "d /srv/pyrodactyl 0770 root 82 -"
     "d /srv/pyrodactyl/database 0770 nscd nscd -"
