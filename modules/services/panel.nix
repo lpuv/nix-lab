@@ -34,6 +34,7 @@
       environmentFile = config.age.secrets."cloudflare".path;
       # Ensure the Nginx user can read the generated certificate files.
       group = "nginx";
+      dnsResolver = "192.168.2.5:5353"; # outside network blocks UDP and we need to bypass unbound
     };
   };
 
