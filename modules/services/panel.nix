@@ -79,17 +79,19 @@
 
     # -- Database Container --
     pyro-database = {
-      image = "mariadb:10.11";
+      image = "docker.io/mariadb:10.11";
       ports = ["3306:3306"];
       volumes = [ "/srv/pyrodactyl/database:/var/lib/mysql" ];
       # Load database credentials securely from the agenix-decrypted file.
       environmentFiles = [ config.age.secrets."pyrodactyl-db".path ];
+      labels = { "io.containers.autoupdate" = "registry"; };
     };
 
     # -- Cache Container --
     pyro-cache = {
       ports = ["6379:6379"];
-      image = "redis:alpine";
+      image = "docker.io/redis:alpine";
+      labels = { "io.containers.autoupdate" = "registry"; };
     };
 
     # -- Pyrodactyl Panel Container --
@@ -106,6 +108,7 @@
       ];
       # Load panel configuration from the agenix-decrypted file.
       environmentFiles = [ config.age.secrets."pyrodactyl-panel".path ];
+      labels = { "io.containers.autoupdate" = "registry"; };
     };
 
     # -- Pterodactyl Wings Container --
@@ -136,6 +139,7 @@
         # This mounts the ACME certs into a 'certs' subdirectory inside the container.
         "${config.security.acme.certs."panel.internal.craftcat.dev".directory}:/etc/pterodactyl/certs:ro"
       ];
+      labels = { "io.containers.autoupdate" = "registry"; };
     };
     playit-agent = {
       image = "ghcr.io/playit-cloud/playit-agent:0.15";
@@ -143,6 +147,7 @@
         "--net=host"
       ];
       environmentFiles = [ config.age.secrets."playit-tunnel".path ];
+      labels = { "io.containers.autoupdate" = "registry"; };
     };
   };
 

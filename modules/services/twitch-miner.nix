@@ -14,7 +14,7 @@
   # Define the Twitch Channel Points Miner container
   virtualisation.oci-containers.containers = {
     twitch-miner = {
-      image = "rdavidoff/twitch-channel-points-miner-v2:latest";
+      image = "docker.io/rdavidoff/twitch-channel-points-miner-v2:latest";
       ports = [ "5000:5000" ];  # Analytics web interface
       volumes = [
         "/srv/twitch-miner/analytics:/usr/src/app/analytics"
@@ -32,6 +32,7 @@
         "--interactive"
         "--dns=132.206.44.21"
       ];
+      labels = { "io.containers.autoupdate" = "registry"; };
     };
   };
 

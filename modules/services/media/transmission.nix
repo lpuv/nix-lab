@@ -2,7 +2,7 @@
  {
   config.virtualisation.oci-containers.containers = {
     transmission = {
-      image = "haugene/transmission-openvpn:5.3";
+      image = "docker.io/haugene/transmission-openvpn:5.3";
       ports = ["9091:9091"];
       volumes = [
         "/media/torrents:/media/torrents"
@@ -25,6 +25,7 @@
         "--cap-add=NET_ADMIN"
         "--device=/dev/net/tun"
       ];
+      labels = { "io.containers.autoupdate" = "registry"; };
      };
    };
 
