@@ -44,6 +44,11 @@
     "d /srv/twitch-miner/logs 0755 root root -"
   ];
 
+  systemd.services."podman-twitch-miner".serviceConfig = {
+    Restart = "always";
+    RuntimeMaxSec = "2h";
+  };
+
   # Create a basic run.py configuration file if it doesn't exist
   systemd.services.create-twitch-miner-config = {
     description = "Create Twitch Miner configuration if missing";
@@ -155,15 +160,6 @@ EOF
     '';
   };
 
-  # Timer to restart the twitch-miner container every 2 hours
-  systemd.timers."podman-twitch-miner" = {
-    description = "Daily restart of Twitch Miner every 2 hours";
-    wantedBy = [ "timers.target" ];
-    timerConfig = {
-      OnCalendar = "0/2:00:00"; # for some reason, the container breaks a LOT
-      Persistent = true;
-    };
-  };
 
   # Configure Caddy reverse proxy for the analytics web interface
   services.caddy.virtualHosts."twitch-miner.internal.craftcat.dev" = {
