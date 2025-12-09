@@ -11,6 +11,7 @@
 
   # Enable Docker for running OCI containers (DNS over TLS forwarder)
   virtualisation.docker.enable = true;
+  systemd.timers.podman-auto-update.wantedBy = [ "multi-user.target" ];
 
   age.secrets."cloudflare" = {
     file = ../secrets/cloudflare.age;

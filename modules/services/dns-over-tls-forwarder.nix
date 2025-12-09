@@ -6,7 +6,7 @@
   
   virtualisation.oci-containers.containers = {
     dns-over-tls-forwarder = {
-      image = "cloudflare/cloudflared:latest";
+      image = "docker.io/cloudflare/cloudflared:latest";
       autoStart = true;
       ports = [
         "5353:5353/udp"
@@ -26,6 +26,7 @@
       environment = {
         TZ = "America/Toronto";
       };
+      labels = { "io.containers.autoupdate" = "registry"; };
     };
   };
 
