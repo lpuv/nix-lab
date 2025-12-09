@@ -14,7 +14,7 @@
     playwrightSupport = true;
     behindProxy = true;
     listenAddress = "0.0.0.0";
-    baseURL = "https://changes.craftcat.dev"
+    baseURL = "https://changes.craftcat.dev";
   };
 
 }
