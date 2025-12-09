@@ -149,6 +149,13 @@
             imports = [ ./hosts/twitch-miner-lxc.nix ];
             deployment.targetHost = "twitch-miner.internal.craftcat.dev";
           };
+
+        changes =
+          { name, nodes, ...}:
+          {
+            imports = [ ./hosts/changes-lxc.nix ];
+            deployment.targetHost = "changes.internal.craftcat.dev";
+          };
       };
 
       # It's also good practice to expose the raw NixOS configurations.
