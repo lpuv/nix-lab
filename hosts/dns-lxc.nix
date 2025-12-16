@@ -82,6 +82,8 @@
       # The AdGuard Home service runs as the 'adguardhome' user.
       # This group permission ensures it can read the generated certificate.
       group = "adguardhome";
+      extraLegoFlags = ["--dns.propagation-wait=100s"];
+      dnsResolver = "192.168.2.5:5353"; # outside network blocks UDP and we need to bypass unbound
     };
   };
 
