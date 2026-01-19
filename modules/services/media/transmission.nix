@@ -2,29 +2,26 @@
  {
   config.virtualisation.oci-containers.containers = {
     transmission = {
-      image = "docker.io/haugene/transmission-openvpn:5.3";
+      image = "docker.io/haugene/transmission-wireguard:main";
       ports = ["9091:9091"];
       volumes = [
         "/media/torrents:/media/torrents"
         "/media/config/transmission:/config"
+        "/media/config/transmission/wg-config:/wg-config"
       ];
       environment = {
-        CREATE_TUN_DEVICE = "false";
         TZ = "America/Toronto";
-        OPENVPN_PROVIDER = "mullvad";
-        OPENVPN_CONFIG = "ca_mtr";
         TRANSMISSION_WEB_HOME = "/config/flood-for-transmission/";
         LOCAL_NETWORK = "192.168.2.0/24";
         WHITELIST = "*.*.*.*";
+        CONFIG_FILE = "/wg-config/ca-mtr-001.conf";
       };
       user = "root";
-      environmentFiles = [
-        config.age.secrets."transmission.env".path
-      ];
       extraOptions = [
         "--cap-add=NET_ADMIN"
         "--device=/dev/net/tun"
       ];
+      privileged = true;
       labels = { "io.containers.autoupdate" = "registry"; };
      };
    };
