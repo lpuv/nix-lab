@@ -24,6 +24,8 @@
     443
   ];
 
+  boot.kernel.sysctl."net.ipv4.conf.all.src_valid_mark" = 1;
+
   # Enable OpenGL and add transcoding drivers
   hardware.opengl = {
     enable = true;

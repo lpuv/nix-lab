@@ -1,4 +1,4 @@
- { config, pkgs, ... }:
+ { lib, config, pkgs, ... }:
  {
   config.virtualisation.oci-containers.containers = {
     transmission = {
@@ -14,15 +14,26 @@
         TRANSMISSION_WEB_HOME = "/config/flood-for-transmission/";
         LOCAL_NETWORK = "192.168.2.0/24";
         WHITELIST = "*.*.*.*";
-        CONFIG_FILE = "/wg-config/ca-mtr-001.conf";
+        CONFIG_FILE = "/wg-config/ca-mtr-wg-001.conf";
       };
       user = "root";
       extraOptions = [
         "--cap-add=NET_ADMIN"
-        "--device=/dev/net/tun"
       ];
       privileged = true;
       labels = { "io.containers.autoupdate" = "registry"; };
+      entrypoint = lib.mkForce "/bin/sh";
+
+      cmd = [
+        "-c"
+        ''
+          set -e
+          mkdir -p /sys2
+          mount -t sysfs sysfs /sys2 --make-private
+          exec dumb-init -vv /opt/wireguard/start.sh
+        ''
+      ];
+
      };
    };
 
