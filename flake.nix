@@ -63,6 +63,7 @@
         # You can override these per-node.
         defaults = {
           deployment.targetUser = "luna";
+          deployment.buildOnTarget = true;
 
           # Special arguments that will be passed to all configurations.
           # This is useful for passing down `pkgs` or other global values.
