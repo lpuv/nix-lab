@@ -213,5 +213,12 @@
           modules = [ ./hosts/finance-lxc.nix ];
         };
       };
+
+      devShells.${system}.default = pkgs.mkShell {
+        packages = [
+          colmena.packages.${system}.colmena
+          pkgs.git
+        ];
+      };
     };
 }
