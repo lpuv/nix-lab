@@ -62,98 +62,98 @@
       # Create blacklist file if it doesn't exist
       if [ ! -f /srv/twitch-miner/blacklist.txt ]; then
         cat > /srv/twitch-miner/blacklist.txt << 'EOF'
-          # Twitch Channel Points Miner - Blacklist Configuration
-          # 
-          # Add usernames (one per line) that you want to exclude from point farming.
-          # Lines starting with # are comments and will be ignored.
-          #
-          # Example:
-          # annoying_streamer
-          # another_username
-          # 
-          # This file is automatically read by the miner on startup.
+# Twitch Channel Points Miner - Blacklist Configuration
+# 
+# Add usernames (one per line) that you want to exclude from point farming.
+# Lines starting with # are comments and will be ignored.
+#
+# Example:
+# annoying_streamer
+# another_username
+# 
+# This file is automatically read by the miner on startup.
 
-        EOF
+EOF
         chmod 644 /srv/twitch-miner/blacklist.txt
         echo "Created blacklist.txt file at /srv/twitch-miner/blacklist.txt"
       fi
 
       if [ ! -f /srv/twitch-miner/run.py ]; then
         cat > /srv/twitch-miner/run.py << 'EOF'
-          # -*- coding: utf-8 -*-
-          # Twitch Channel Points Miner v2 Configuration
-          # 
-          # This is a basic configuration file for the Twitch Channel Points Miner.
-          # Edit this file to customize your settings.
-          #
-          # For full documentation, see:
-          # https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2
+# -*- coding: utf-8 -*-
+# Twitch Channel Points Miner v2 Configuration
+# 
+# This is a basic configuration file for the Twitch Channel Points Miner.
+# Edit this file to customize your settings.
+#
+# For full documentation, see:
+# https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2
 
-          import logging
-          from TwitchChannelPointsMiner import TwitchChannelPointsMiner
-          from TwitchChannelPointsMiner.logger import LoggerSettings
-          from TwitchChannelPointsMiner.classes.Settings import Priority, FollowersOrder
-          from TwitchChannelPointsMiner.classes.entities.Bet import Strategy, BetSettings, Condition, OutcomeKeys, FilterCondition
-          from TwitchChannelPointsMiner.classes.entities.Streamer import Streamer, StreamerSettings
+import logging
+from TwitchChannelPointsMiner import TwitchChannelPointsMiner
+from TwitchChannelPointsMiner.logger import LoggerSettings
+from TwitchChannelPointsMiner.classes.Settings import Priority, FollowersOrder
+from TwitchChannelPointsMiner.classes.entities.Bet import Strategy, BetSettings, Condition, OutcomeKeys, FilterCondition
+from TwitchChannelPointsMiner.classes.entities.Streamer import Streamer, StreamerSettings
 
-          # Initialize the miner
-          twitch_miner = TwitchChannelPointsMiner(
-              username="lunapuv",  # Twitch username
-              # password="your-password",  # Optional: If not provided, you'll be prompted for login
-              claim_drops_startup=False,
-              priority=[
-                  Priority.STREAK,    # Prioritize watch streaks
-                  Priority.DROPS,     # Claim drops when available  
-                  Priority.ORDER      # Follow the order of streamers in the list
-              ],
-              enable_analytics=True,  # Enable analytics for web interface on port 5000
-              logger_settings=LoggerSettings(
-                  save=True,
-                  console_level=logging.INFO,
-                  file_level=logging.DEBUG,
-                  emoji=True,
-                  less=False,
-                  colored=True
-              )
-          )
+# Initialize the miner
+twitch_miner = TwitchChannelPointsMiner(
+    username="lunapuv",  # Twitch username
+    # password="your-password",  # Optional: If not provided, you'll be prompted for login
+    claim_drops_startup=False,
+    priority=[
+        Priority.STREAK,    # Prioritize watch streaks
+        Priority.DROPS,     # Claim drops when available  
+        Priority.ORDER      # Follow the order of streamers in the list
+    ],
+    enable_analytics=True,  # Enable analytics for web interface on port 5000
+    logger_settings=LoggerSettings(
+        save=True,
+        console_level=logging.INFO,
+        file_level=logging.DEBUG,
+        emoji=True,
+        less=False,
+        colored=True
+    )
+)
 
-          # Start analytics web server (accessible on port 5000)
-          twitch_miner.analytics(host="0.0.0.0", port=5000, refresh=5, days_ago=7)
+# Start analytics web server (accessible on port 5000)
+twitch_miner.analytics(host="0.0.0.0", port=5000, refresh=5, days_ago=7)
 
-          # Start mining points
-          # Option 1: Use your followers list automatically with blacklist support
-          try:
-              # Try to read blacklist from file
-              with open('/srv/twitch-miner/blacklist.txt', 'r') as f:
-                  blacklist = [line.strip() for line in f.readlines() if line.strip() and not line.startswith('#')]
-          except FileNotFoundError:
-              blacklist = []
+# Start mining points
+# Option 1: Use your followers list automatically with blacklist support
+try:
+    # Try to read blacklist from file
+    with open('/srv/twitch-miner/blacklist.txt', 'r') as f:
+        blacklist = [line.strip() for line in f.readlines() if line.strip() and not line.startswith('#')]
+except FileNotFoundError:
+    blacklist = []
 
-          twitch_miner.mine(
-              followers=True,
-              followers_order=FollowersOrder.ASC,
-              blacklist=blacklist
-          )
+twitch_miner.mine(
+    followers=True,
+    followers_order=FollowersOrder.ASC,
+    blacklist=blacklist
+)
 
-          # Option 2: Specify streamers manually (uncomment and modify)
-          # twitch_miner.mine([
-          #     "streamer1",
-          #     "streamer2", 
-          #     "streamer3",
-          #     Streamer("streamer4", settings=StreamerSettings(
-          #         make_predictions=True,
-          #         follow_raid=True,
-          #         bet=BetSettings(
-          #             strategy=Strategy.SMART,
-          #             percentage=5,
-          #             max_points=50000
-          #         )
-          #     ))
-          # ], blacklist=blacklist)  # Can also use blacklist with manual streamer lists
+# Option 2: Specify streamers manually (uncomment and modify)
+# twitch_miner.mine([
+#     "streamer1",
+#     "streamer2", 
+#     "streamer3",
+#     Streamer("streamer4", settings=StreamerSettings(
+#         make_predictions=True,
+#         follow_raid=True,
+#         bet=BetSettings(
+#             strategy=Strategy.SMART,
+#             percentage=5,
+#             max_points=50000
+#         )
+#     ))
+# ], blacklist=blacklist)  # Can also use blacklist with manual streamer lists
 
-          # To exclude streamers from farming, edit /srv/twitch-miner/blacklist.txt
-          # Add one username per line to prevent farming from those streamers
-        EOF
+# To exclude streamers from farming, edit /srv/twitch-miner/blacklist.txt
+# Add one username per line to prevent farming from those streamers
+EOF
         chmod 644 /srv/twitch-miner/run.py
         echo "Created default run.py configuration. Please edit /srv/twitch-miner/run.py with your settings."
       fi
