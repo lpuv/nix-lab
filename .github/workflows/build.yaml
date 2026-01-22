@@ -14,5 +14,4 @@ jobs:
       - uses: workflow/nix-shell-action@v3
         with:
           packages: colmena
-          script: colmena --build --no-build-on-target
-      - run: "nix run github:zhaofengli/colmena -- build --no-build-on-target"
+          script: colmena build --no-build-on-target
