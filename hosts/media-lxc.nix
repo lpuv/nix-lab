@@ -16,6 +16,7 @@
     ../modules/services/media/radarr.nix
     ../modules/services/media/sonarr.nix
     ../modules/services/media/transmission.nix
+    ../modules/services/media/whisper.nix
   ];
 
   networking.hostName = "media.internal.craftcat.dev";
