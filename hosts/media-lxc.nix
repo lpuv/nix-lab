@@ -17,6 +17,7 @@
     ../modules/services/media/sonarr.nix
     ../modules/services/media/transmission.nix
     ../modules/services/media/whisper.nix
+    ../modules/services/media/lingarr.nix
   ];
 
   networking.hostName = "media.internal.craftcat.dev";
@@ -70,6 +71,10 @@
       group = "media";
     };
     transmission = {
+      isSystemUser = true;
+      group = "media";
+    };
+    lingarr = {
       isSystemUser = true;
       group = "media";
     };

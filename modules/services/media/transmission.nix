@@ -16,7 +16,6 @@
         WHITELIST = "*.*.*.*";
         CONFIG_FILE = "/wg-config/ca-mtr-wg-001.conf";
       };
-      user = "root";
       extraOptions = [
         "--cap-add=NET_ADMIN"
       ];
