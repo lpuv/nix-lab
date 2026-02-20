@@ -21,7 +21,6 @@
     isSystemUser = true; # It's a service user, not a person.
     group = "dawarich";
     # The user needs a home directory to write data to.
-    home = "/var/lib/dawarich";
   };
   users.users.nginx.extraGroups = [ "dawarich" ];
 
