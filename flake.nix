@@ -157,6 +157,13 @@
             imports = [ ./hosts/changes-lxc.nix ];
             deployment.targetHost = "changes.internal.craftcat.dev";
           };
+        
+        timeline =
+          { name, nodes, ...}:
+          {
+            imports = [ ./hosts/timeline-lxc.nix ];
+            deployment.targetHost = "timeline.internal.craftcat.dev";
+          };
       };
 
       # It's also good practice to expose the raw NixOS configurations.
@@ -211,6 +218,16 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/finance-lxc.nix ];
+        };
+        "changes-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/changes-lxc.nix ];
+        };
+        "timeline-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/timeline-lxc.nix ];
         };
       };
 
