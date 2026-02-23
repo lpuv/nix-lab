@@ -16,6 +16,8 @@
     localDomain = "timeline.craftcat.dev";
     environment = {
       TIME_ZONE = "America/Toronto";
+      PHOTON_API_HOST = "photon.komoot.io";
+      PHOTON_API_USE_HTTPS = "true";
     };
   };
 }
