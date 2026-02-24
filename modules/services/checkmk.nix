@@ -15,7 +15,7 @@
     ];
     
     extraOptions = [ 
-      "--tmpfs" "/opt/omd/sites/cmk/tmp:uid=1000,gid=1000" 
+      "--tmpfs" "/opt/omd/sites/cmk/tmp" 
     ];
   };
 
