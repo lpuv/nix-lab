@@ -170,6 +170,12 @@
             imports = [ ./hosts/home-lxc.nix ];
             deployment.targetHost = "home.internal.craftcat.dev";
           };
+        monitor =
+          {name, nodes, ...}:
+          {
+            imports = [ ./hosts/monitor-lxc.nix ];
+            deployment.targetHost = "monitor.internal.craftcat.dev";
+          };
       };
 
       # It's also good practice to expose the raw NixOS configurations.
@@ -239,6 +245,11 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/home-lxc.nix ];
+        };
+        "monitor-lxc" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/monitor-lxc.nix ];
         };
       };
 
