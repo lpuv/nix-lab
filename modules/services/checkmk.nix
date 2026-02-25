@@ -10,14 +10,14 @@
     ];
     
     volumes = [
+      # Using a named volume isolates the data from host user
       "checkmk_sites:/omd/sites"
       "/etc/localtime:/etc/localtime:ro"
     ];
     
-    extraOptions = [
-      "--userns=host"
-      "--mount=type=tmpfs,destination=/omd/sites/cmk/tmp,tmpfs-mode=1777"
-      "--cap-add=NET_RAW"
+    extraOptions = [ 
+      # Grants Checkmk the ability to ping other containers
+      "--cap-add=NET_RAW"    
     ];
   };
 
