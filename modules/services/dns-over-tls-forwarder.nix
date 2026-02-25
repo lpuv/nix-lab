@@ -1,27 +1,35 @@
 { lib, config, pkgs, ... }:
 
+let
+  dnscryptConfig = ''
+    listen_addresses = ['0.0.0.0:5053']
+
+    dnscrypt_servers = false
+    doh_servers = true
+
+    require_dnssec = false
+    require_nolog = true
+    require_nofilter = true
+
+    ignore_system_dns = false
+    bootstrap_resolvers = []
+  '';
+in
 {
+  environment.etc."dnscrypt-proxy/dnscrypt-proxy.toml".text = dnscryptConfig;
   # Create a DNS over TLS forwarder service using cloudflared in DNS proxy mode
   # This will listen on a dedicated port and forward DNS queries to Cloudflare over TLS
   
   virtualisation.oci-containers.containers = {
-    dns-over-tls-forwarder = {
-      image = "docker.io/cloudflare/cloudflared:latest";
+    dns-doh-forwarder = {
+      image = "docker.io/klutchell/dnscrypt-proxy:latest";
       autoStart = true;
       ports = [
-        "5353:5353/udp"
-        "5353:5353/tcp"
+        "5353:5053/udp"
+        "5353:5053/tcp"
       ];
-      cmd = [
-        "proxy-dns"
-        "--address"
-        "0.0.0.0"
-        "--port"
-        "5353"
-        "--upstream"
-        "https://1.1.1.1/dns-query"
-        "--upstream"
-        "https://1.0.0.1/dns-query"
+      volumes = [
+        "/etc/dnscrypt-proxy:/config"
       ];
       environment = {
         TZ = "America/Toronto";
