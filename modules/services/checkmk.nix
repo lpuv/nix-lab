@@ -22,5 +22,5 @@
     labels = { "io.containers.autoupdate" = "registry"; };
   };
 
-  networking.firewall.allowedTCPPorts = [ 8080 8000 ];
+  networking.firewall.allowedTCPPorts = [ 8080 8000 3000 ];
 }

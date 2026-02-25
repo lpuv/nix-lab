@@ -10,6 +10,7 @@
   imports = [
     ../modules/common.nix
     ../modules/services/checkmk.nix
+    ../modules/services/grafana-checkmk.nix
   ];
 
   # Set the hostname for this container.
