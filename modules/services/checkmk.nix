@@ -16,6 +16,7 @@
     
     extraOptions = [ 
       "--tmpfs" "/opt/omd/sites/cmk/tmp" 
+      "--cap-add=NET_RAW"
     ];
   };
 
