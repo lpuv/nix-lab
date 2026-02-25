@@ -2,7 +2,7 @@
 
 {
   virtualisation.oci-containers.containers."checkmk" = {
-    image = "checkmk/check-mk-raw:2.4.0-latest";
+    image = "docker.io/checkmk/check-mk-raw:2.4.0-latest";
     
     ports = [
       "8080:5000"
