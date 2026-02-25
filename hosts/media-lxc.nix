@@ -8,6 +8,7 @@
 {
   imports = [
     ../modules/common.nix
+    ../modules/services/checkmk-agent.nix
     ../modules/services/media/bazarr.nix
     ../modules/services/media/caddy.nix
     ../modules/services/media/flaresolverr.nix

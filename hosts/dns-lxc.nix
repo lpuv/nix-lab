@@ -3,6 +3,7 @@
 {
   imports = [
     ../modules/common.nix
+    ../modules/services/checkmk-agent.nix
     ../modules/services/dns.nix
     ../modules/services/dns-over-tls-forwarder.nix
   ];

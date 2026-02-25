@@ -9,6 +9,7 @@
   # Import shared configurations and the specific service module.
   imports = [
     ../modules/common.nix
+    ../modules/services/checkmk-agent.nix
     ../modules/services/dawarich.nix
   ];
 

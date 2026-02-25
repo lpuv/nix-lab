@@ -9,6 +9,7 @@
   # Import shared configurations and the specific service module.
   imports = [
     ../modules/common.nix
+    ../modules/services/checkmk-agent.nix
     ../modules/services/twitch-miner.nix
     ../modules/services/media/caddy.nix
   ];

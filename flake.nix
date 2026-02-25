@@ -13,6 +13,9 @@
     # A utility library to make flakes easier to write
     flake-utils.url = "github:numtide/flake-utils";
 
+    # Unmerged Checkmk PR branch
+    checkmk-pr.url = "github:weriomat/nixpkgs/checkmk-agent";
+
     # The deployment tool
     colmena = {
       url = "github:zhaofengli/colmena";
@@ -56,6 +59,7 @@
           # This allows Colmena to pass flake inputs to your configurations.
           # It's essential for accessing things like agenix.
           # flake-inputs = inputs;
+          nodeSpecialArgs = { inherit inputs; };
           nixpkgs = pkgs;
         };
 

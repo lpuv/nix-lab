@@ -4,6 +4,7 @@
   imports = [
     # Import the common configuration for all hosts.
     ../modules/common.nix
+    ../modules/services/checkmk-agent.nix
     ../modules/services/cloudflared.nix
   ];
 
