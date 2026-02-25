@@ -23,6 +23,22 @@
         "type": "github"
       }
     },
+    "checkmk-pr": {
+      "locked": {
+        "lastModified": 1767024734,
+        "narHash": "sha256-ueTBa12kQyF9YHUcdMPyzXpmn/ZAnyo5PtFmLk3PM04=",
+        "owner": "weriomat",
+        "repo": "nixpkgs",
+        "rev": "df3748fda6607307cfb619ab7f4e604708533799",
+        "type": "github"
+      },
+      "original": {
+        "owner": "weriomat",
+        "ref": "checkmk-agent",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "colmena": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -179,6 +195,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "checkmk-pr": "checkmk-pr",
         "colmena": "colmena",
         "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs"
