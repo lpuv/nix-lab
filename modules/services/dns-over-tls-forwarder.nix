@@ -1,27 +1,32 @@
 { lib, config, pkgs, ... }:
 
 let
+  # The configuration for the dnscrypt-proxy binary inside the container
   dnscryptConfig = ''
     listen_addresses = ['0.0.0.0:5053']
+    
+    # Use the static server defined below
+    server_names = ['cloudflare']
 
+    # Security and Privacy settings
     dnscrypt_servers = false
     doh_servers = true
-
     require_dnssec = false
     require_nolog = true
     require_nofilter = true
-
     ignore_system_dns = false
-    bootstrap_resolvers = []
+
+    [static]
+      [static.'cloudflare']
+      stamp = 'sdns://AgcAAAAAAAAABzEuMS4xLjEAEmRucy5jbG91ZGZsYXJlLmNvbQovZG5zLXF1ZXJ5'
   '';
 in
 {
+  # 1. Create the config file
   environment.etc."dnscrypt-proxy/dnscrypt-proxy.toml".text = dnscryptConfig;
-  # Create a DNS over TLS forwarder service using cloudflared in DNS proxy mode
-  # This will listen on a dedicated port and forward DNS queries to Cloudflare over TLS
-  
+
   virtualisation.oci-containers.containers = {
-    dns-doh-forwarder = {
+    "dns-doh-forwarder" = {
       image = "docker.io/klutchell/dnscrypt-proxy:latest";
       autoStart = true;
       ports = [
@@ -29,18 +34,24 @@ in
         "5353:5053/tcp"
       ];
       volumes = [
-        "/etc/dnscrypt-proxy:/config"
+        # Mount the file directly from the resolved etc path
+        "/etc/dnscrypt-proxy/dnscrypt-proxy.toml:/config/dnscrypt-proxy.toml:ro"
       ];
       environment = {
         TZ = "America/Toronto";
       };
+      # Ensure the path in 'cmd' matches the mount point exactly
+      cmd = [ "-config" "/config/dnscrypt-proxy.toml" ];
       labels = { "io.containers.autoupdate" = "registry"; };
     };
   };
 
-  # Configure service restart behavior for reliability
-  systemd.services."podman-dns-over-tls-forwarder".serviceConfig = {
-    # Wait 30 seconds before trying to restart the service after a failure
-    RestartSec = "30s";
+  # 2. Corrected service name for the override
+  systemd.services."podman-dns-doh-forwarder" = {
+    serviceConfig = {
+      RestartSec = "30s";
+    };
+    # Ensure the config file exists before the container starts
+    after = [ "etc-dnscrypt-proxy-dnscrypt-proxy.toml.mount" ];
   };
 }
