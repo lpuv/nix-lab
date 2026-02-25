@@ -15,7 +15,7 @@
     ];
     
     extraOptions = [
-      "--userns=keep-id"
+      "--userns=host"
       "--mount=type=tmpfs,destination=/omd/sites/cmk/tmp,tmpfs-mode=1777"
       "--cap-add=NET_RAW"
     ];
