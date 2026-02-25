@@ -44,6 +44,11 @@
   security.sudo.wheelNeedsPassword = false;
   
 
+  # FreeIPA Cert
+  security.pki.certificateFiles = [
+    ../certs/freeipa-ca.crt
+  ];
+
   # ============================================================================
   # Common Packages
   # ============================================================================

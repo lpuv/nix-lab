@@ -19,6 +19,7 @@
       # Grants Checkmk the ability to ping other containers
       "--cap-add=NET_RAW"    
     ];
+    labels = { "io.containers.autoupdate" = "registry"; };
   };
 
   networking.firewall.allowedTCPPorts = [ 8080 8000 ];
