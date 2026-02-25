@@ -10,6 +10,7 @@
   imports = [
     ../modules/common.nix
     ../modules/services/checkmk.nix
+    ../modules/services/checkmk-agent.nix
     ../modules/services/grafana-checkmk.nix
   ];
 
