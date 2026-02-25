@@ -17,7 +17,6 @@ in
     # 3. Force the service to use the package from the PR, not your system pkgs
     package = cmkPkgs.checkmk-agent;
     
-    # Checkmk communicates over TCP port 6556
-    openFirewall = true; 
   };
+  networking.firewall.allowedTCPPorts = [ 6556 ];
 }

@@ -59,7 +59,7 @@
           # This allows Colmena to pass flake inputs to your configurations.
           # It's essential for accessing things like agenix.
           # flake-inputs = inputs;
-          nodeSpecialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs; };
           nixpkgs = pkgs;
         };
 
