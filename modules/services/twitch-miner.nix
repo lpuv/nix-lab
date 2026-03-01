@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, ... }:
 
 {
   # Open firewall for the analytics web interface
@@ -45,7 +45,7 @@
   ];
 
   systemd.services."podman-twitch-miner".serviceConfig = {
-    Restart = "always";
+    Restart = lib.mkForce "always";
     RuntimeMaxSec = "2h";
   };
 
