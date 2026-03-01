@@ -35,6 +35,9 @@
     ];
   };
 
+  # needed because acme-setup service tries to chown before adguardhome has not created it yet
+  users.groups.adguardhome = {};
+
   # --- Local Recursive DNS (Unbound) ---
   # Enable the Unbound service. AdGuard Home will use this as its upstream.
   # Port 5335: Unbound (recursive DNS)
