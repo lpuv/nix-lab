@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, inputs, ... }:
 
 {
   imports = [
@@ -35,8 +35,17 @@
     ];
   };
 
-  # needed because acme-setup service tries to chown before adguardhome has not created it yet
+  users.users.adguardhome = {
+    isSystemUser = true;
+    group = "adguardhome";
+  };
   users.groups.adguardhome = {};
+  systemd.services.adguardhome.serviceConfig = {
+    DynamicUser = lib.mkForce false;
+    User = "adguardhome";
+    Group = "adguardhome";
+    SupplementaryGroups = [ "acme" ];
+  };
 
   # --- Local Recursive DNS (Unbound) ---
   # Enable the Unbound service. AdGuard Home will use this as its upstream.
