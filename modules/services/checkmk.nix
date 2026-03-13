@@ -18,6 +18,7 @@
     extraOptions = [ 
       # Grants Checkmk the ability to ping other containers
       "--cap-add=NET_RAW"    
+      "--health-on-failure=kill" # surely i won't regret this...
     ];
     labels = { "io.containers.autoupdate" = "registry"; };
   };
