@@ -13,6 +13,7 @@
       443  # For Nginx HTTPS
       8080 # Wings Telemetry
       2022  # Wings SFTP
+      3306
     ];
     # You may need to open UDP ports for game servers here as well.
     # allowedUDPPorts = [ 25565 ];
@@ -74,7 +75,14 @@
   # 5. DOCKER & CONTAINER DEFINITIONS
   # --------------------------------------------------------------------
   # Enable Docker, which is required for running the containers.
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    # Wings strictly expects the json-file driver for console logs
+    logDriver = "json-file"; 
+  };
+  
+  # Tell oci-containers to use Docker instead of Podman
+  virtualisation.oci-containers.backend = "docker";
 
   # Declaratively define all containers needed for the Pterodactyl stack.
   virtualisation.oci-containers.containers = {
@@ -82,7 +90,11 @@
     # -- Database Container --
     pyro-database = {
       image = "docker.io/mariadb:10.11";
-      ports = ["3306:3306"];
+      ports = [
+        "3306:3306"          # MariaDB
+        "127.0.0.1:8081:80"  # Map the HOST 8081 to the NETWORK'S 80
+        "6379:6379"
+      ];
       volumes = [ "/srv/pyrodactyl/database:/var/lib/mysql" ];
       # Load database credentials securely from the agenix-decrypted file.
       environmentFiles = [ config.age.secrets."pyrodactyl-db".path ];
@@ -91,9 +103,11 @@
 
     # -- Cache Container --
     pyro-cache = {
-      ports = ["6379:6379"];
       image = "docker.io/redis:alpine";
       labels = { "io.containers.autoupdate" = "registry"; };
+      extraOptions = [
+        "--network=container:pyro-database"
+      ];
     };
 
     # -- Pyrodactyl Panel Container --
@@ -101,7 +115,6 @@
       image = "ghcr.io/pyrohost/pyrodactyl:main";
       dependsOn = [ "pyro-database" "pyro-cache" ];
       # Expose the panel's port 80 only to the host on port 8081 for Nginx.
-      ports = [ "127.0.0.1:8081:80" ];
       volumes = [
         "/srv/pyrodactyl/var:/app/var"
         "/srv/pyrodactyl/nginx:/etc/nginx/http.d"
@@ -111,13 +124,14 @@
       # Load panel configuration from the agenix-decrypted file.
       environmentFiles = [ config.age.secrets."pyrodactyl-panel".path ];
       labels = { "io.containers.autoupdate" = "registry"; };
+      extraOptions = [
+        "--network=container:pyro-database"
+      ];
     };
 
     # -- Pterodactyl Wings Container --
     wings = {
       image = "ghcr.io/pterodactyl/wings:latest";
-      # We are now using port mappings instead of host networking to match the compose file.
-      ports = [ "8080:8080" "2022:2022" ];
       environment = {
         # These variables are good for consistency with the official compose file.
         TZ = "America/Toronto";
@@ -126,20 +140,25 @@
         WINGS_USERNAME = "pterodactyl";
       };
       volumes = [
-        "/run/podman/podman.sock:/var/run/docker.sock"
-        # This volume is important for Wings to inspect other containers.
-        "/var/lib/containers/:/var/lib/docker/containers/"
-        # Mount the decrypted wings config directly into the container.
+        # Mount the actual Docker socket
+        "/var/run/docker.sock:/var/run/docker.sock"
+        
+        # Wings needs this exact path to read container logs
+        "/var/lib/docker/containers:/var/lib/docker/containers" 
+        
+        # Mount the decrypted wings config
         "${config.age.secrets."wings-config".path}:/etc/pterodactyl/config.yml"
         "/var/lib/pterodactyl:/var/lib/pterodactyl"
-        # Adding log and temp directories for better debugging and operation.
         "/var/log/pterodactyl/:/var/log/pterodactyl/"
         "/tmp/pterodactyl/:/tmp/pterodactyl/"
-        # This provides the container with the host's trusted SSL certificates.
+        "/run/wings:/run/wings"
+        
+        # SSL and certs
         "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt:/etc/ssl/certs/ca-certificates.crt:ro"
-
-        # This mounts the ACME certs into a 'certs' subdirectory inside the container.
         "${config.security.acme.certs."panel.internal.craftcat.dev".directory}:/etc/pterodactyl/certs:ro"
+      ];
+      extraOptions = [
+        "--net=host"
       ];
       labels = { "io.containers.autoupdate" = "registry"; };
     };
