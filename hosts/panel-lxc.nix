@@ -14,6 +14,21 @@
 
   systemd.timers.podman-auto-update.wantedBy = [ "multi-user.target" ];
 
+
+  environment.systemPackages = with pkgs; [
+    tcpdump
+  ];
+  
+  boot.kernel.sysctl = {
+    # Disable strict reverse path filtering
+    "net.ipv4.conf.all.rp_filter" = 0;
+    "net.ipv4.conf.default.rp_filter" = 0;
+    "net.ipv4.conf.eth0.rp_filter" = 0;
+
+    # Allow the kernel to handle the local routing of these packets
+    "net.ipv4.ip_forward" = 1;
+  };
+
   systemd.tmpfiles.rules = [
     "d /srv/pyrodactyl 0770 root 82 -"
     "d /srv/pyrodactyl/database 0770 nscd nscd -"

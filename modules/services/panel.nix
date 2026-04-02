@@ -14,9 +14,12 @@
       8080 # Wings Telemetry
       2022  # Wings SFTP
       3306
+      25565
+      25566
+      25567
     ];
     # You may need to open UDP ports for game servers here as well.
-    # allowedUDPPorts = [ 25565 ];
+    allowedUDPPorts = [ 25565 25566 25567 ];
   };
 
   # --------------------------------------------------------------------
