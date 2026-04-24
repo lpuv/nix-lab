@@ -128,13 +128,6 @@
             deployment.targetHost = "cfproxy.internal.craftcat.dev";
           };
 
-        receipts =
-          { name, nodes, ... }:
-          {
-            imports = [ ./hosts/receipts-lxc.nix ];
-            deployment.targetHost = "receipts.internal.craftcat.dev";
-          };
-
         trilium =
           { name, nodes, ... }:
           {
@@ -214,11 +207,6 @@
           inherit system;
           specialArgs = { inherit inputs; };
           modules = [ ./hosts/cfproxy.nix ];
-        };
-        "receipts-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/receipts-lxc.nix ];
         };
         "trilium-lxc" = nixpkgs.lib.nixosSystem {
           inherit system;
