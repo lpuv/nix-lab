@@ -17,7 +17,7 @@
     ../modules/services/media/radarr.nix
     ../modules/services/media/sonarr.nix
     ../modules/services/media/transmission.nix
-    ../modules/services/media/whisper.nix
+    # ../modules/services/media/whisper.nix # this uses way too much memory and i never use it
     ../modules/services/media/lingarr.nix
   ];
 
