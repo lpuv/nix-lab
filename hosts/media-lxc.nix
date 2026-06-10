@@ -29,15 +29,23 @@
 
   boot.kernel.sysctl."net.ipv4.conf.all.src_valid_mark" = 1;
 
-  # Enable OpenGL and add transcoding drivers
-  hardware.opengl = {
+
+  # Cleaned up and fixed hardware graphics configuration
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      mesa
+      intel-media-driver
+      intel-vaapi-driver
+      libva-vdpau-driver
+      libvdpau-va-gl
     ];
   };
 
-  hardware.graphics.enable = true;
+  # Make sure the environment variables are exposed globally so systemd services find them
+  environment.variables = {
+    LIBVA_DRIVERS_PATH = "/run/opengl-driver/lib/dri";
+  };
+
 
   environment.systemPackages = [
     pkgs.jellyfin
