@@ -15,6 +15,7 @@
         LOCAL_NETWORK = "192.168.2.0/24";
         WHITELIST = "*.*.*.*";
         CONFIG_FILE = "/wg-config/ca-mtr-wg-001.conf";
+        SKIP_DNS_OVERRIDE = "true";
       };
       extraOptions = [
         "--cap-add=NET_ADMIN"
