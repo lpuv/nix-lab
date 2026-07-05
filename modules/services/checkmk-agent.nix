@@ -7,11 +7,11 @@ in
 {
   # 1. Import the unmerged NixOS module directly via its file path in the PR
   imports = [
-    "${inputs.checkmk-pr}/nixos/modules/services/monitoring/cmk-agent.nix"
+    "${inputs.checkmk-pr}/nixos/modules/services/monitoring/checkmk-agent.nix"
   ];
 
   # 2. Configure the service
-  services.cmk-agent = {
+  services.checkmk-agent = {
     enable = true;
     
     # 3. Force the service to use the package from the PR, not your system pkgs
