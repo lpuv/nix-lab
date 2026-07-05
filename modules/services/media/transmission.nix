@@ -19,6 +19,8 @@
       };
       extraOptions = [
         "--cap-add=NET_ADMIN"
+        "--dns=1.1.1.1"
+        "--sysctl=net.ipv4.conf.all.src_valid_mark=1"
       ];
       privileged = true;
       labels = { "io.containers.autoupdate" = "registry"; };
