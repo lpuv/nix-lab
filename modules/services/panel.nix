@@ -115,7 +115,7 @@
 
     # -- Pyrodactyl Panel Container --
     pyro-panel = {
-      image = "ghcr.io/pyrohost/pyrodactyl:main";
+      image = "ghcr.io/blueprintframework/hydrodactyl:latest";
       dependsOn = [ "pyro-database" "pyro-cache" ];
       # Expose the panel's port 80 only to the host on port 8081 for Nginx.
       volumes = [
@@ -123,6 +123,7 @@
         "/srv/pyrodactyl/nginx:/etc/nginx/http.d"
         "/srv/pyrodactyl/certs:/etc/letsencrypt"
         "/srv/pyrodactyl/logs:/app/storage/logs"
+        "/srv/pyrodactyl/storage/:/app/storage/app/public"
       ];
       # Load panel configuration from the agenix-decrypted file.
       environmentFiles = [ config.age.secrets."pyrodactyl-panel".path ];
