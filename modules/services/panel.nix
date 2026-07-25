@@ -167,7 +167,7 @@
       labels = { "io.containers.autoupdate" = "registry"; };
     };
     playit-agent = {
-      image = "ghcr.io/playit-cloud/playit-agent:0.15";
+      image = "ghcr.io/playit-cloud/playit-agent:latest";
       extraOptions = [
         "--net=host"
       ];
