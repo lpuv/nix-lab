@@ -62,6 +62,7 @@
     unzip      # A tool for extracting archives
     dig        # A tool for testing DNS
     unrar-free # A tool for extracting rar files
+    ghostty.terminfo # ghostty terminfo
   ];
 
   # ============================================================================
