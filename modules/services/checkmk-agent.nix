@@ -2,7 +2,7 @@
 
 let
   # Instantiate the nixpkgs tree specifically from the PR branch
-  cmkPkgs = import inputs.checkmk-pr { inherit (pkgs) system; };
+  cmkPkgs = import inputs.checkmk-pr { inherit (pkgs.stdenv.hostPlatform) system; };
 in
 {
   # 1. Import the unmerged NixOS module directly via its file path in the PR

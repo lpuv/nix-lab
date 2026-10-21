@@ -49,6 +49,23 @@
       # Define the system architecture you are deploying to.
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+
+      # Build a standalone NixOS configuration with the same modules and
+      # arguments Colmena applies to every node through `defaults`.
+      mkNixosConfiguration =
+        hostModule:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            agenix.nixosModules.default
+            ./hosts/common/default.nix
+            ./hosts/common/nix.nix
+            ./hosts/common/openssh.nix
+            hostModule
+            { networking.domain = "internal.craftcat.dev"; }
+          ];
+        };
     in
     {
       # The primary output for Colmena v0.5+
@@ -178,71 +195,19 @@
       # It's also good practice to expose the raw NixOS configurations.
       # This allows you to build them manually with `nixos-rebuild` if you ever need to.
       nixosConfigurations = {
-        "media-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/media-lxc.nix ];
-        };
-        # "languagetool-lxc" = nixpkgs.lib.nixosSystem {
-        #   inherit system;
-        #   specialArgs = { inherit inputs; };
-        #   modules = [ ./hosts/languagetool-lxc.nix ];
-        # };
-        # "open-webui-lxc" = nixpkgs.lib.nixosSystem {
-        #   inherit system;
-        #   specialArgs = { inherit inputs; };
-        #   modules = [ ./hosts/open-webui-lxc.nix ];
-        # };
-        "panel-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/panel-lxc.nix ];
-        };
-        "dns-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/dns-lxc.nix ];
-        };
-        "cfproxy-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/cfproxy.nix ];
-        };
-        "trilium-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/trilium-lxc.nix ];
-        };
-        "twitch-miner-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/twitch-miner-lxc.nix ];
-        };
-        "finance-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/finance-lxc.nix ];
-        };
-        "changes-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/changes-lxc.nix ];
-        };
-        "timeline-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/timeline-lxc.nix ];
-        };
-        "home-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/home-lxc.nix ];
-        };
-        "monitor-lxc" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [ ./hosts/monitor-lxc.nix ];
-        };
+        "media-lxc" = mkNixosConfiguration ./hosts/media-lxc.nix;
+        # "languagetool-lxc" = mkNixosConfiguration ./hosts/languagetool-lxc.nix;
+        # "open-webui-lxc" = mkNixosConfiguration ./hosts/open-webui-lxc.nix;
+        "panel-lxc" = mkNixosConfiguration ./hosts/panel-lxc.nix;
+        "dns-lxc" = mkNixosConfiguration ./hosts/dns-lxc.nix;
+        "cfproxy-lxc" = mkNixosConfiguration ./hosts/cfproxy-lxc.nix;
+        "trilium-lxc" = mkNixosConfiguration ./hosts/trilium-lxc.nix;
+        "twitch-miner-lxc" = mkNixosConfiguration ./hosts/twitch-miner-lxc.nix;
+        "finance-lxc" = mkNixosConfiguration ./hosts/finance-lxc.nix;
+        "changes-lxc" = mkNixosConfiguration ./hosts/changes-lxc.nix;
+        "timeline-lxc" = mkNixosConfiguration ./hosts/timeline-lxc.nix;
+        "home-lxc" = mkNixosConfiguration ./hosts/home-lxc.nix;
+        "monitor-lxc" = mkNixosConfiguration ./hosts/monitor-lxc.nix;
       };
 
       devShells.${system}.default = pkgs.mkShell {
